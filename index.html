@@ -45,8 +45,7 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p><aside class="warning">
-The requests presented on this API documentation are being made to the <strong>staging server</strong>.
-Here is the list of the possible servers:
+The requests presented on this API documentation are for our live <strong>production environment</strong>. For development and testing, it is recommended to use our <strong>sandbox environment</strong>.
 </aside></p>
 
 <table><thead>
@@ -66,21 +65,26 @@ Here is the list of the possible servers:
 </tbody></table>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>To get your access token, use this code. <br>
-Make sure to replace <code class="prettyprint">XXXXXX</code> and <code class="prettyprint">YYYYYY</code> with your API information. <br>
-Also, make sure you are introducing valid specialist credentials.</p>
+<p>The RubiconMD server authenticates via the use of access tokens. <br></p>
 </blockquote>
 <pre class="highlight shell"><span class="c"># Just a standard HTTP Request</span>
+
+<span class="c">## User authentication not required (app has standing permissions from user)</span>
 curl -i https://rubiconmd.com/api/v1/oauth/token
- -F <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"password"</span>
- -F <span class="nv">email</span><span class="o">=</span><span class="s2">"SpecialistEmail"</span>
- -F <span class="nv">password</span><span class="o">=</span><span class="s2">"SpecialistPassword"</span>
- -F <span class="nv">client_id</span><span class="o">=</span><span class="s2">"XXXXXX"</span>
- -F <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YYYYYY"</span>
+ -F <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"standing"</span>
+ -F <span class="nv">email</span><span class="o">=</span><span class="s2">"USER_EMAIL_ADDRESS"</span>
+ -F <span class="nv">client_id</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_ID"</span>
+ -F <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_SECRET"</span>
+
+ <span class="c">## User authentication required</span>
+ curl -i https://rubiconmd.com/api/v1/oauth/token
+ -F <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"client_credentials"</span>
+ -F <span class="nv">client_id</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_ID"</span>
+ -F <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_SECRET"</span>
 </pre>
 
 <blockquote>
-<p>Which will return:</p>
+<p>A successful request will return:</p>
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -91,17 +95,187 @@ curl -i https://rubiconmd.com/api/v1/oauth/token
 </span><span class="p">]</span><span class="w">
 </span></pre>
 
-<p>RubiconMD uses keys to allow access to the API. You can ask <a href="mailto:%20michael@rubiconmd.com?Subject=Rubicon%20API%20Keys">Michael</a> for a new one.
-RubiconMD uses basically OAuth2 type authentication. So once you are authorized, you will get an access token.</p>
+<p>RubiconMD uses an OAuth2 workflow for obtaining the access tokens needed for API access.</p>
 
-<p>RubiconMD API expects for the access token you will recieve to be included in all API requests to the server, being this snippet the first parameter in each petition.</p>
+<p>To make an access token request, valid API keys are required. To request or cycle your API keys, please contact <a href="mailto:%20michael@rubiconmd.com?Subject=Rubicon%20API%20Keys">Michael</a>.</p>
+
+<p>RubiconMD API requires a valid access token to be included within the parameters for all API requests to the server:</p>
 
 <p><code class="prettyprint">?access_token=&quot;AAAAAA&quot;</code></p>
 
 <p><aside class="notice">
-All access_tokens expire in two hours. You will then have to ask for another one so you can keep on using the API.
+For security, all access_tokens expire in two hours.
 </aside></p>
-<h1 id='case-referrals'>Case Referrals</h1><h2 id='get-all-case-referrals-for-an-user'>Get All Case Referrals for an User</h1><pre class="highlight shell">curl https://rubiconmd.com/api/v1/referrals?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h3 id='grant-types'>Grant Types</h1>
+<p><code class="prettyprint">standing</code>: If you are making a request on behalf of a user that has granted standing access to your application (if you created the user, such permissions are granted by default), then this grant type will return an access token that will be sufficient to make requests that user to authenticate on the RubiconMD site.</p>
+
+<p><code class="prettyprint">client_credentials</code>: This will return a token that can be used for making queries that do not require a user to be logged in. This includes OAuth2-type queries where the user authenticates on the RubiconMD site, then is redirected back to your site with a valid_access token for making API calls on the user&rsquo;s behalf.</p>
+<h1 id='provider-cases'>Provider Cases</h1>
+<p>Provider Cases are created by a user that is seeking a specialist response to the case.</p>
+<h2 id='get-all-provider-cases'>Get All Provider Cases</h1><pre class="highlight shell">curl https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</pre>
+
+<blockquote>
+<p>A successful request returns the following:</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">888</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assigned"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is it possible to have a case of Rocky Mountain Spotted Fever occur in the Appalachians and with stripes?"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>This endpoint retrieves all the provider case for the authenticated user.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/provider_cases?access_token=&quot;AAAAAA&quot;</code></p>
+<h3 id='query-optional-parameters'>Query Optional Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>state</td>
+<td>Only returns cases of the specified state. Possible options: assigned, accepted, declined, awaiting_review, need_specialist_reply, need_pcp_reply, closed</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Retrieves the number of cases specified. (Must be an integer.)</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-provider-case'>Get a Specific Provider Case</h1><pre class="highlight shell">curl https://rubiconmd.com/api/v1/provider_cases/10071849?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</pre>
+
+<blockquote>
+<p>A successful request returns the following:</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"If not Red Death, maybe Telltale Heart Disease?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lots of partying and excessive drinking."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amontillado"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"convulsions, bloody sweat, seeing masked illusions."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>This endpoint will return the JSON data about a specific case.</p>
+
+<p><aside class="notice">
+ Make sure to replace <code class="prettyprint">CASE_ID</code> with the actual ID of the case you want to look up.
+</aside></p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID?access_token=&quot;AAAAAA&quot;</code></p>
+<h3 id='url-parameters'>URL Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CASE_ID</td>
+<td>The ID of the case to retrieve</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-new-provider-case'>Create a New Provider Case</h1><pre class="highlight shell">curl -X POST
+  -H <span class="s2">"Content-Type: application/json"</span>
+  -d <span class="s1">'{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_casees?access_token=AAAAAA"</span>
+</pre>
+
+<blockquote>
+<p>A successful POST request returns a JSON response:</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"If not Red Death, maybe Telltale Heart Disease?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lots of partying and excessive drinking."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amontillado"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"convulsions, bloody sweat, seeing masked illusions."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">POST https://rubiconmd.com/api/v1/provider_cases/ {&quot;provider_case&quot;: {&quot;question&quot;: TEXT, &quot;patient_birthdate&quot;: TEXT, &quot;patient_gender&quot;: TEXT, &quot;patient_first_name&quot;: TEXT, &quot;patient_middle_name&quot;: TEXT, &quot;patient_last_name&quot;: TEXT, &quot;differential_diagnosis&quot;: TEXT, &quot;medical_history&quot;: TEXT, &quot;medications&quot;: TEXT, &quot;symptoms&quot;: TEXT, &quot;labs&quot;: TEXT} }</code></p>
+<h3 id='url-parameters'>URL Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question</td>
+<td>The specific question for the specialist to answer.</td>
+</tr>
+<tr>
+<td>patient_birthdate</td>
+<td>Patient birthdate. Must be formatted as text: &ldquo;YYYY-MM-DD&rdquo;</td>
+</tr>
+<tr>
+<td>patient_gender</td>
+<td>Patient gender. Only acceptable values are &ldquo;Female&rdquo;,  &ldquo;Male&rdquo;, and &ldquo;Other&rdquo;.</td>
+</tr>
+<tr>
+<td>patient_first_name</td>
+<td>Patient first name.</td>
+</tr>
+<tr>
+<td>patient_middle_name</td>
+<td>Patient middle name.</td>
+</tr>
+<tr>
+<td>patient_last_name</td>
+<td>Patient last name.</td>
+</tr>
+<tr>
+<td>differential_diagnosis</td>
+<td>A differential diagnosis.</td>
+</tr>
+<tr>
+<td>medical_history</td>
+<td>Patient medical history.</td>
+</tr>
+<tr>
+<td>medications</td>
+<td>Patient medications.</td>
+</tr>
+<tr>
+<td>symptoms</td>
+<td>Patient symtoms.</td>
+</tr>
+<tr>
+<td>labs</td>
+<td>Lab results.</td>
+</tr>
+</tbody></table>
+<h1 id='case-referrals'>Case Referrals</h1>
+<p>Case Referrals are the de-identified cases received by a specialist. Only users that are specialists can access Case Referrals.</p>
+<h2 id='get-all-case-referrals'>Get All Case Referrals</h1><pre class="highlight shell">curl https://rubiconmd.com/api/v1/referrals?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </pre>
 
 <blockquote>
@@ -240,17 +414,19 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 </tbody></table>
 
 <p><strong>Actions:</strong> accept, reject</p>
-<h1 id='case-responses'>Case Responses</h1><h2 id='get-all-responses-for-a-specific-case'>Get All Responses for a Specific Case</h1><pre class="highlight shell">curl https://rubiconmd.com/api/v1/referrals/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h1 id='case-responses'>Case Responses</h1><h2 id='get-all-responses'>Get All Responses</h1><pre class="highlight shell">curl https://rubiconmd.com/api/v1/referrals/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+
+curl https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this, these are examples of both pcp and specialist responses:</p>
+<p>A successful request returns an array of JSON responses:</p>
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
     </span><span class="s2">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
     </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is where you put the specialist text response."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"specialist_opinion"</span><span class="p">,</span><span class="w">
@@ -259,7 +435,7 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
   </span><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
   </span><span class="s2">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a pcp response."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:19:33.554-04:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pcp_reply"</span><span class="p">,</span><span class="w">
@@ -268,9 +444,13 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 </span><span class="p">]</span><span class="w">
 </span></pre>
 
-<p>This endpoint retrieves all the responses for a specific case.</p>
+<p>Retrieves all the responses associated with a specific case.</p>
 <h3 id='http-request'>HTTP Request</h1>
 <p><code class="prettyprint">GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses?access_token=&quot;AAAAAA&quot;</code></p>
+
+<p>or </p>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses?access_token=&quot;AAAAAA&quot;</code></p>
 <h3 id='url-parameters'>URL Parameters</h1>
 <table><thead>
 <tr>
@@ -283,7 +463,45 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 <td>The ID of the case to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-specific-response-from-a-case'>Get A Specific Response from a Case</h1><pre class="highlight shell">curl https://rubiconmd.com/api/v1/referrals/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h3 id='response-fields'>Response Fields</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>ID # of response</td>
+</tr>
+<tr>
+<td>case_id</td>
+<td>ID # of associated case</td>
+</tr>
+<tr>
+<td>specialist_id</td>
+<td>ID # of specialist that made the response (if user was a provider, this value will be nil)</td>
+</tr>
+<tr>
+<td>body</td>
+<td>The text of the response</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Time response was created</td>
+</tr>
+<tr>
+<td>purpose</td>
+<td>Either &lsquo;pcp_comment&rsquo; or &lsquo;specialist_reply&rsquo;</td>
+</tr>
+<tr>
+<td>need_reply</td>
+<td>Boolean value dictating whether or not creator needed a reply to the response</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-response'>Get a Specific Response</h1><pre class="highlight shell">curl https://rubiconmd.com/api/v1/referrals/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+
+curl https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </pre>
 
 <blockquote>
@@ -292,7 +510,7 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 <pre class="highlight json"><span class="p">{</span><span class="w">  
   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="w">
   </span><span class="s2">"case_id"</span><span class="p">:</span><span class="mi">63</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user_id"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="w">
   </span><span class="s2">"body"</span><span class="p">:</span><span class="s2">"This is where you put the specialist text response."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"purpose"</span><span class="p">:</span><span class="s2">"specialist_opinion"</span><span class="p">,</span><span class="w">
@@ -300,9 +518,13 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
-<p>This allows you to recieve a specific response from a specific case.</p>
+<p>Lookup a specific response by the response&rsquo;s ID.</p>
 <h3 id='http-request'>HTTP Request</h1>
 <p><code class="prettyprint">GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses/RESPONSE_ID?access_token=&quot;AAAAAA&quot;</code></p>
+
+<p>or </p>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses/RESPONSE_ID?access_token=&quot;AAAAAA&quot;</code></p>
 <h3 id='url-parameters'>URL Parameters</h1>
 <table><thead>
 <tr>
@@ -321,26 +543,34 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 </tbody></table>
 <h2 id='post-a-response'>Post a Response</h1><pre class="highlight shell">curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"response":{"body":"This is where you put the specialist text response.","purpose":"specialist_opinion","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/referrals/63/responses?access_token=AAAAAA"</span>
+  -d <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"specialist_opinion","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/referrals/63/responses?access_token=AAAAAA"</span>
+
+curl -X POST
+  -H <span class="s2">"Content-Type: application/json"</span>
+  -d <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"pcp_comment","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token=AAAAAA"</span>
 </pre>
 
 <blockquote>
-<p>The above command returns JSON like this:</p>
+<p>A successful POST request returns a JSON response:</p>
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"case_id"</span><span class="p">:</span><span class="mi">63</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user_id"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"body"</span><span class="p">:</span><span class="s2">"This is where you put the specialist text response."</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="s2">"specialist_opinion"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"need_reply"</span><span class="p">:</span><span class="kc">true</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is where you put the text of the response."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pcp_comment"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"need_reply"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
 <p>This allows you post a response in a specific case (as a specialist). It also returns your response.</p>
 <h3 id='http-request'>HTTP Request</h1>
 <p><code class="prettyprint">POST https://rubiconmd.com/api/v1/referrals/CASE_ID/responses/ {&quot;response&quot;: {&quot;body&quot;: TEXT, &quot;purpose&quot;: &quot;specialist_opinion&quot;, &quot;need_reply&quot;: BOOLEAN} }</code></p>
+
+<p>or </p>
+
+<p><code class="prettyprint">POST https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses/ {&quot;response&quot;: {&quot;body&quot;: TEXT, &quot;purpose&quot;: &quot;pcp_comment&quot;, &quot;need_reply&quot;: BOOLEAN} }</code></p>
 <h3 id='url-parameters'>URL Parameters</h1>
 <table><thead>
 <tr>
@@ -358,16 +588,16 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 </tr>
 <tr>
 <td>purpose</td>
-<td>&ldquo;specialist_opinion&rdquo; , it cannot be changed</td>
+<td>&ldquo;specialist_opinion&rdquo; or &ldquo;pcp_comment&rdquo;</td>
 </tr>
 <tr>
 <td>need_reply</td>
-<td>BOOLEAN field , depending on your need of the PCP to reply to your response</td>
+<td>BOOLEAN field, set to true if a reply is required from the provider/specialist</td>
 </tr>
 </tbody></table>
 
 <p><aside class="notice">
- The app you are building should always be reporting <strong>purpose</strong> as &ldquo;specialist_opinion&rdquo;.
+The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if the purpose does not match the user type (e.g., the user is a provider but the purpose is &ldquo;specialist_reply&rdquo;).
 </aside></p>
 
 <!-- 
@@ -464,35 +694,6 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 <td>User&rsquo;s role. Roles are limited to the following values: &lsquo;medical_doctor&rsquo; , &lsquo;physician_assistant&rsquo; , &lsquo;registered_nurse&rsquo; , &lsquo;nurse_practitioner&rsquo;</td>
 </tr>
 </tbody></table>
-<h2 id='registering-user-devices'>Registering User Devices</h1><pre class="highlight shell">curl -X POST
-  -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"device":{"token":"thisIsTheDeviceToken"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/user_devices?access_token=AAAAAA"</span>
-</pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="s2">"11"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"token"</span><span class="p">:</span><span class="s2">"thisIsTheDeviceToken"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-
-<p>This endpoint is intended to register Apple devices so the user can receive push notifications.</p>
-<h3 id='http-request'>HTTP Request</h1>
-<p><code class="prettyprint">POST https://rubiconmd.com/api/v1/user_devices/ { &quot;device&quot;: { &quot;token&quot;: STRING } }</code></p>
-<h3 id='url-parameters'>URL Parameters</h1>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>The device token you get when you register the device for push notifications.</td>
-</tr>
-</tbody></table>
 
           <h1 id='errors'>Errors</h1>
 <p><aside class="notice">Some of the errors you may find:</aside></p>
@@ -505,23 +706,27 @@ An unsuccessful call will return a <strong>402</strong> and an error message:
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request is not a good one.</td>
+<td>Bad Request &ndash; We don&rsquo;t know what&rsquo;s wrong, but it&rsquo;s probably your fault.</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your access token must be expired.</td>
+<td>Unauthorized &ndash; Bad or expired access token.</td>
 </tr>
 <tr>
 <td>402</td>
-<td>Case could not be accepted at this time.</td>
+<td>Case could not be accepted at this time. &ndash; But try again soon.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found</td>
+<td>Not Found &ndash; Wherever you go, there you are. (Unless of course, we give you a 404 error.)</td>
+</tr>
+<tr>
+<td>420</td>
+<td>Enhance Your Calm &ndash; Medical marijuana error.</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+<td>Internal Server Error &ndash; Our bad.</td>
 </tr>
 </tbody></table>
 
