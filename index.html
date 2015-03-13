@@ -71,7 +71,7 @@ The requests presented on this API documentation are for our live **production e
 <p>The RubiconMD server authenticates via the use of access tokens. <br></p>
 </blockquote>
 <pre><code class="highlight shell"><span class="c"># Just a standard HTTP Request</span>
-  Note: Be sure to curl http: when connecting with the sandbox and https: when on production. Our examples are <span class="k">for </span>accessing the Production <span class="k">in </span>this regard.
+  Note: Be sure to curl using http: protocol when connecting to the sandbox and https: when connecting to production. Our examples are <span class="k">for </span>accessing the Production <span class="k">in </span>this regard.
 
 <span class="c">## User authentication not required (app has standing permissions from user)</span>
 curl -i https://rubiconmd.com/api/v1/oauth/token
@@ -122,7 +122,7 @@ For security, all access_tokens expire in two hours.
 <p>Provider Cases are created by a user that is seeking a specialist response to the case.</p>
 
 <h2 id="get-all-provider-cases">Get All Provider Cases</h2>
-<pre><code class="highlight shell">curl https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </code></pre>
 
 <blockquote>
@@ -167,7 +167,7 @@ For security, all access_tokens expire in two hours.
 </tbody></table>
 
 <h2 id="get-a-specific-provider-case">Get a Specific Provider Case</h2>
-<pre><code class="highlight shell">curl https://rubiconmd.com/api/v1/provider_cases/10071849?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/provider_cases/10071849?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </code></pre>
 
 <blockquote>
@@ -305,7 +305,7 @@ For security, all access_tokens expire in two hours.
 <p>Case Referrals are the de-identified cases received by a specialist. Only users that are specialists can access Case Referrals.</p>
 
 <h2 id="get-all-case-referrals">Get All Case Referrals</h2>
-<pre><code class="highlight shell">curl https://rubiconmd.com/api/v1/referrals?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/referrals?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </code></pre>
 
 <blockquote>
@@ -354,7 +354,7 @@ For security, all access_tokens expire in two hours.
 <p><strong>limit:</strong> Integer number.</p>
 
 <h2 id="get-a-specific-case-referral">Get a Specific Case Referral</h2>
-<pre><code class="highlight shell">curl https://rubiconmd.com/api/v1/referrals/57?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/referrals/57?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </code></pre>
 
 <blockquote>
@@ -403,7 +403,7 @@ For security, all access_tokens expire in two hours.
 </tbody></table>
 
 <h2 id="accept-/-reject-a-specific-case">Accept / Reject a Specific Case</h2>
-<pre><code class="highlight shell">curl https://rubiconmd.com/api/v1/referrals/57/reject?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/referrals/57/reject?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </code></pre>
 
 <blockquote>
@@ -430,12 +430,12 @@ For security, all access_tokens expire in two hours.
 <p>This endpoint allows you to accept or turn down a specific case.</p>
 
 <aside class="success">
-When you accept/reject a case, a successful call will return the JSON data about the case.
+When a case is accepted, a successful call will return the JSON data about the case. A successful rejected case call will return: {message: &ldquo;The case was successfully rejected.&rdquo;}
 </aside>
 
 <aside class="warning">
 An unsuccessful call will return a **402** and an error message:
-`{&ldquo;error&rdquo;:&ldquo;This case could not be accepted at this time.&rdquo;}
+{&ldquo;error&rdquo;:&ldquo;This case could not be accepted at this time.&rdquo;}
 </aside>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -465,9 +465,9 @@ An unsuccessful call will return a **402** and an error message:
 <h1 id="case-responses">Case Responses</h1>
 
 <h2 id="get-all-responses">Get All Responses</h2>
-<pre><code class="highlight shell">curl https://rubiconmd.com/api/v1/referrals/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/referrals/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 
-curl https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </code></pre>
 
 <blockquote>
@@ -558,9 +558,9 @@ curl https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<span 
 </tbody></table>
 
 <h2 id="get-a-specific-response">Get a Specific Response</h2>
-<pre><code class="highlight shell">curl https://rubiconmd.com/api/v1/referrals/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/referrals/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 
-curl https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </code></pre>
 
 <blockquote>
@@ -680,7 +680,7 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 <h1 id="users">Users</h1>
 
 <h2 id="user-information">User Information</h2>
-<pre><code class="highlight shell">curl https://rubiconmd.com/api/v1/users/me?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/users/me?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 </code></pre>
 
 <blockquote>
