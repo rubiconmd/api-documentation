@@ -71,6 +71,7 @@ The requests presented on this API documentation are for our live **production e
 <p>The RubiconMD server authenticates via the use of access tokens. <br></p>
 </blockquote>
 <pre><code class="highlight shell"><span class="c"># Just a standard HTTP Request</span>
+  Note: Be sure to curl http: when connecting with the sandbox and https: when on production. Our examples are <span class="k">for </span>accessing the Production <span class="k">in </span>this regard.
 
 <span class="c">## User authentication not required (app has standing permissions from user)</span>
 curl -i https://rubiconmd.com/api/v1/oauth/token
@@ -217,7 +218,7 @@ For security, all access_tokens expire in two hours.
 <h2 id="create-a-new-provider-case">Create a New Provider Case</h2>
 <pre><code class="highlight shell">curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_casees?access_token=AAAAAA"</span>
+  -d <span class="s1">'{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases?access_token=AAAAAA"</span>
 </code></pre>
 
 <blockquote>
