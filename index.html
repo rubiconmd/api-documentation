@@ -776,6 +776,75 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 </tr>
 </tbody></table>
 
+<h1 id="iframe">iFrame</h1>
+
+<h2 id="iframe-api-calls">iFrame API calls</h2>
+
+<p>In order to call our API through an iFrame, you must first obtain a user token.  It&rsquo;s a two-step process.</p>
+
+<ol>
+<li>Get a user token by curling the token endpoint with the access token.</li>
+<li>Append the user token along with user info in the url.</li>
+</ol>
+
+<aside class="notice">
+User tokens are one-time/single use only.
+</aside>
+
+<h2 id="obtaining-a-user-token">Obtaining a user token</h2>
+
+<p>To get a user token, curl the endpoint with the access token.</p>
+<pre><code class="highlight shell">curl -i https://rubiconmd.com/api/v1/users/token?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre>
+
+<blockquote>
+<p>A successful request will return:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"user_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/users/token?access_token=&quot;AAAAAA&quot;</code></p>
+
+<h2 id="auto-login-&amp;-display-case">Auto-login &amp; Display case</h2>
+
+<p>Pass user email, user token, and case id parameters into the URL.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/pcp_iframe?user_email=EMAIL&amp;user_token=TOKEN&amp;case_id=CASE_ID</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>The e-mail of the user you are logging in.</td>
+</tr>
+<tr>
+<td>user_token</td>
+<td>Single-use user token.</td>
+</tr>
+<tr>
+<td>case_id</td>
+<td>The ID of the case you want to see.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If you send the user to the iframe with an invalid token the user will be asked to login.  No errors will be raised.
+</aside>
+
           <h1 id="errors">Errors</h1>
 
 <aside class="notice">Some of the errors you may find:</aside>
