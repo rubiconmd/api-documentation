@@ -501,7 +501,7 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<sp
 
 <p><code class="prettyprint">GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses?access_token=&quot;AAAAAA&quot;</code></p>
 
-<p>or </p>
+<p>or</p>
 
 <p><code class="prettyprint">GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses?access_token=&quot;AAAAAA&quot;</code></p>
 
@@ -566,7 +566,7 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token
 <blockquote>
 <p>The above command returns JSON like this:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">  
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="w">
   </span><span class="s2">"case_id"</span><span class="p">:</span><span class="mi">63</span><span class="p">,</span><span class="w">
   </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="w">
@@ -583,7 +583,7 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token
 
 <p><code class="prettyprint">GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses/RESPONSE_ID?access_token=&quot;AAAAAA&quot;</code></p>
 
-<p>or </p>
+<p>or</p>
 
 <p><code class="prettyprint">GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses/RESPONSE_ID?access_token=&quot;AAAAAA&quot;</code></p>
 
@@ -635,7 +635,7 @@ curl -X POST
 
 <p><code class="prettyprint">POST https://rubiconmd.com/api/v1/referrals/CASE_ID/responses/ {&quot;response&quot;: {&quot;body&quot;: TEXT, &quot;purpose&quot;: &quot;specialist_opinion&quot;, &quot;need_reply&quot;: BOOLEAN} }</code></p>
 
-<p>or </p>
+<p>or</p>
 
 <p><code class="prettyprint">POST https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses/ {&quot;response&quot;: {&quot;body&quot;: TEXT, &quot;purpose&quot;: &quot;pcp_comment&quot;, &quot;need_reply&quot;: BOOLEAN} }</code></p>
 
@@ -669,7 +669,7 @@ curl -X POST
 The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if the purpose does not match the user type (e.g., the user is a provider but the purpose is &ldquo;specialist_reply&rdquo;).
 </aside>
 
-<!-- 
+<!--
  ##
  ##
  ## USER INFO
@@ -802,7 +802,9 @@ User tokens are one-time/single use only.
 </blockquote>
 <pre><code class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"user_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="w">
+    </span><span class="s2">"user_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1302048000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -813,11 +815,11 @@ User tokens are one-time/single use only.
 
 <h2 id="auto-login-&amp;-display-case">Auto-login &amp; Display case</h2>
 
-<p>Pass user email, user token, and case id parameters into the URL.</p>
+<p>Pass users&rsquo; username, user token, and case id parameters into the URL.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://rubiconmd.com/pcp_iframe?user_email=EMAIL&amp;user_token=TOKEN&amp;case_id=CASE_ID</code></p>
+<p><code class="prettyprint">GET https://rubiconmd.com/pcp_iframe?user_username=EMAIL&amp;user_token=TOKEN&amp;case_id=CASE_ID</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
