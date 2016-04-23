@@ -190,6 +190,48 @@ For security, all access_tokens expire in two hours.
 
 <p><code class="prettyprint">client_credentials</code>: This will return a token that can be used for making queries that do not require a user to be logged in. This includes OAuth2-type queries where the user authenticates on the RubiconMD site, then is redirected back to your site with a valid_access token for making API calls on the user&rsquo;s behalf.</p>
 
+<h1 id="basics">Basics</h1>
+
+<p>Here are some basic tools you can use with all API calls.</p>
+
+<h2 id="limit">Limit</h2>
+
+<aside class="warning">
+  The limit parameter has been deprecated &ndash; it was just too limit-ed. Please use `per_page`, instead.
+</aside>
+
+<h2 id="paginators">Paginators</h2>
+<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>&amp;per_page<span class="o">=</span>15&amp;page<span class="o">=</span>2
+</code></pre>
+
+<p>You can use the <code class="prettyprint">per_page</code> and <code class="prettyprint">page</code> parameters to paginate results. If neither parameter is provided, all records will be returned by default.</p>
+
+<aside class="success">
+Using pagination greatly increases response times and is highly recommended.
+</aside>
+
+<h3 id="per_page">per_page</h3>
+
+<p>Returns the specified number of records per page.</p>
+
+<aside class="notice">
+  For all endpoints, the default number of records `per_page` is 25. If a `per_page` parameter is passed without a `page` parameter, the server will return just the first page by default.
+</aside>
+
+<h3 id="page">page</h3>
+
+<p>Returns the specified page of records. If, for example, you only want to retrieve records 16-30, passing <code class="prettyprint">?per_page=15&amp;page=2</code> as parameters would give you just those records.</p>
+
+<h3 id="header-fields">Header fields</h3>
+
+<p>Using one or both of the pagination parameters will add some useful header fields to the server response, including:</p>
+
+<ul>
+<li><code class="prettyprint">Total</code> - total number of records available</li>
+<li><code class="prettyprint">Per-Page</code> - number of records being returned per page</li>
+<li><code class="prettyprint">Link</code> - the API endpoints (as full URLs) to call for retrieving the next and previous pages of results</li>
+</ul>
+
 <h1 id="provider-cases">Provider Cases</h1>
 
 <p>Provider Cases are created by a user that is seeking a specialist response to the case.</p>
@@ -234,8 +276,12 @@ For security, all access_tokens expire in two hours.
 <td>Only returns cases of the specified state. Possible options: assigned, accepted, declined, awaiting_review, need_specialist_reply, need_pcp_reply, closed</td>
 </tr>
 <tr>
-<td>limit</td>
-<td>Retrieves the number of cases specified. (Must be an integer.)</td>
+<td>per_page</td>
+<td>Number of records to display per_page. <a href="#paginators">Read more.</a></td>
+</tr>
+<tr>
+<td>page</td>
+<td>Page to display. <a href="#paginators">Read more.</a></td>
 </tr>
 </tbody></table>
 
@@ -417,14 +463,16 @@ For security, all access_tokens expire in two hours.
 <td>Gets pending cases with a particular state.</td>
 </tr>
 <tr>
-<td>limit</td>
-<td>Retrieves the specific number of cases you pass it.</td>
+<td>per_page</td>
+<td>Number of records to display per_page. <a href="#paginators">Read more.</a></td>
+</tr>
+<tr>
+<td>page</td>
+<td>Page to display. <a href="#paginators">Read more.</a></td>
 </tr>
 </tbody></table>
 
-<p><strong>States:</strong> assigned, accepted, declined, awaiting_review, need_specialist_reply, need_pcp_reply, closed</p>
-
-<p><strong>limit:</strong> Integer number.</p>
+<p><strong>states:</strong> assigned, accepted, declined, awaiting_review, need_specialist_reply, need_pcp_reply, closed</p>
 
 <h2 id="get-a-specific-case-referral">Get a Specific Case Referral</h2>
 <pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/57?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
@@ -846,6 +894,14 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 <tr>
 <td>role</td>
 <td>User&rsquo;s role. Roles are limited to the following values: &#39;medical_doctor&rsquo; , &#39;physician_assistant&rsquo; , &#39;registered_nurse&rsquo; , &#39;nurse_practitioner&rsquo;</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>Number of records to display per_page. <a href="#paginators">Read more.</a></td>
+</tr>
+<tr>
+<td>page</td>
+<td>Page to display. <a href="#paginators">Read more.</a></td>
 </tr>
 </tbody></table>
 
