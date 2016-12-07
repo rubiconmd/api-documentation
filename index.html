@@ -790,6 +790,154 @@ curl -X POST
 The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if the purpose does not match the user type (e.g., the user is a provider but the purpose is &ldquo;specialist_reply&rdquo;).
 </aside>
 
+<h1 id="images">Images</h1>
+
+<h2 id="get-all-images-of-a-case">Get All Images of a case</h2>
+<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns an array of JSON responses:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zhy7"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image_file_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ee83c9baf45b73138bc6c771a.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image_file_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">73260</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"removable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/original/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/large/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumb_340"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_340/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumb_180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_180/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"response_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">  
+</span></code></pre>
+
+<p>Retrieves all the images associated with a specific case.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token=AAAAAA</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CASE_ID</td>
+<td>The ID of the case to retrieve</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>ID # of image</td>
+</tr>
+<tr>
+<td>image_file_name</td>
+<td>Encrypted name of the file</td>
+</tr>
+<tr>
+<td>image_file_size</td>
+<td>Size of the file</td>
+</tr>
+<tr>
+<td>image_content_type</td>
+<td>The type of file</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Time image was created</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Time image was updated</td>
+</tr>
+<tr>
+<td>removable</td>
+<td>Whether or not the image can be deleted</td>
+</tr>
+<tr>
+<td>original</td>
+<td>URL of the original image</td>
+</tr>
+<tr>
+<td>large</td>
+<td>URL of the large size image</td>
+</tr>
+<tr>
+<td>thumb_340</td>
+<td>URL of the thumb sized(340px) image</td>
+</tr>
+<tr>
+<td>thumb_180</td>
+<td>URL of the thumb sized(180px) image</td>
+</tr>
+<tr>
+<td>response_id</td>
+<td>Response ID of response attached to the image</td>
+</tr>
+</tbody></table>
+
+<h2 id="post-an-image">Post an Image</h2>
+<pre class="highlight shell"><code>curl -X POST
+  -H <span class="s2">"Origin: https://rubiconmd.com"</span>
+  -F <span class="s2">"attachment[image]=@/path/filename.ext"</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/A-9AGj/attachments?access_token=AAAAAA"</span>
+</code></pre>
+
+<blockquote>
+<p>A successful POST request returns a JSON response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zhy7"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image_file_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ee83c9baf45b73138bc6c771a.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image_file_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">73260</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"removable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/original/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/large/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumb_340"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_340/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumb_180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_180/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"response_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">  
+</span></code></pre>
+
+<p>This allows you post an image in a specific case (as a pcp).</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token=AAAAAA</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CASE_ID</td>
+<td>The ID of the case you want to upload to</td>
+</tr>
+</tbody></table>
+
 <!--
  ##
  ##
