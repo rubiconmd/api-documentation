@@ -1041,6 +1041,195 @@ insurance | Member insurance plan (freetext).
 location | Member current location.
 valid_until | Date that member record is no longer valid, or must be renewed/updated by. Should be formated as MM/DD/YYYY.
 
+# Legal Documents
+
+These API endpoints allow clients to have knowledge of which legal documents have been signed (accepted) by the user. For example, the 'terms of service' or the 'specialist agreement'.
+
+##index
+
+This endpoint returns the basic information of the documents available to the user making the API call.
+
+### HTTP Request
+
+`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"`
+
+<aside class="notice">
+  The user id is needed in the call, in the `:user_id` segment.
+</aside>
+
+The call will return a JSON array with the `name` of the documents, their `id` and their `purpose`. The former two pieces are used to access each individual document.
+
+Differences in the response will reside in:
+
+* A Specialist will get the latest versions of privacy policy, terms of service, specialist agreement and specialis business associate agreement documents.
+* An Organization Admin will get the latest versions the privacy policy, terms of service, business associate agreement and the different versions available for organization contracts. Even if several contract versions are listed, the user will only be able to access and sign the contract that suits the configuration of the Organization they belong to.
+* The rest of users will get the latest versions of the privacy policy and the terms of service.
+
+```shell
+curl -X GET
+  -H "Content-Type: application/json"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"
+```
+
+> The above command would return a json like this:
+
+```json
+[ { "name": "Terms of Service", "purpose": "terms_of_service", "id": "DlGy" },
+  { "name": "Privacy Policy", "purpose": "privacy_policy", "id": "kwey" } ]
+```
+
+##show
+
+This endpoint returns the information for the document related to the `id` passed in the call.
+
+### HTTP Request
+
+`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id?access_token=AAAAAA"`
+
+<aside class="notice">
+  The user id is needed in the call, in the `:user_id` segment.
+</aside>
+
+The call will return the name of the document, the text of the document in html format so it is easily usable in the views, and other info regarding the time of creation of the document.
+
+If the user has signed the document, it will return the date of when this action was performed.
+
+If the document requested is not accessible by the user (according to the user type) or can not be found, the response will have the `422` status code and the body will be `{error: 'Document not available' }`.
+
+```shell
+curl -X GET
+  -H "Content-Type: application/json"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey?access_token=AAAAAA"
+```
+
+> The above command would return a json like this:
+
+```json
+{ "name": "Privacy Policy",
+  "content": "text",
+  "created_at": "2017-12-11T09:17:10.753-05:00",
+  "updated_at": "2017-12-11T09:17:10.753-05:00",
+  "id": "kwey" }
+```
+
+```shell
+curl -X GET
+  -H "Content-Type: application/json"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/DlGy?access_token=AAAAAA"
+```
+
+> The above command, for a signed document, would return a json like this:
+
+```json
+{ "name": "Terms of Service",
+  "content": "text",
+  "created_at": "2017-12-11T09:17:10.753-05:00",
+  "updated_at": "2017-12-11T09:17:10.753-05:00",
+  "id": "kwey",
+  "signature": {
+    "signed_at": "2017-08-01T23:55:10.981-05:00"
+  }
+}
+```
+
+##sign
+
+This endpoint allows a user to sign a document.
+
+### HTTP Request
+
+`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign?access_token=AAAAAA"`
+
+<aside class="notice">
+  The user id is needed in the call, in the `:user_id` segment. The document id is needed as well in the `:id` segment
+</aside>
+
+The call will peform an attempt to generate a signature for the document backend side. If the call succeeds, the returned JSON object will be equivalent to the one in the `show` method, in the case that the user has signed the document.
+
+If the call fails, the response will be a `422` status code and the body will include the error that prevented the signature from being created. One possible reason for failure is that the user has already signed that document. In this case the json response would be: `["Legal document signer should sign a document only once"]`
+
+If the document requested is not accessible by the user (according to the user type) or can not be found, the response will have the `422` status code and the body will be `{ error: 'Document not available' }`.
+
+```shell
+curl -X POST
+  -H "Content-Type: application/json"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey/sign?access_token=AAAAAA"
+```
+
+> The above command, for a signed document, would return a json like this:
+
+```json
+{ "name": "Terms of Service",
+  "content": "text",
+  "created_at": "2017-12-11T09:17:10.753-05:00",
+  "updated_at": "2017-12-11T09:17:10.753-05:00",
+  "id": "kwey",
+  "signature": { "signed_at": "2017-08-01T23:55:10.981-05:00" }
+}
+```
+
+##Accessing documents by type
+
+To ease work for clients, we've enabled the possiblity of accessing and signing the documents directly by their `purpose`, so the initial call for the index method is not needed.
+
+The available purposes are:
+
+General (**all** users):
+
+* `privacy_policy`
+* `terms_of_service`
+
+Right now, all users should have a signature for the `terms_of_service` document in order to use the platform, and be prompted by the client to sign it if otherwise.
+
+Directed to **Organization admins**:
+
+* `contract`
+* `contract_dsa`
+* `baa`
+
+Client Organizations need to have their `baa` and proper `contract` signed in order for their users to be able to access the platform. A client can know beforehand which contract should the organization admin sign with the information provided in the `users#me` endpoint.
+
+Directed to **Specialists**:
+
+* `specialist_agreement`
+* `specialist_baa`
+
+Specialists need to have both documents above signed in order to operate in the platform.
+
+### HTTP Request for accessing a document
+
+`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose?access_token=AAAAAA"`
+
+This call will be equivalent to calling the `show` method described above in terms of returned objects and error messages.
+
+If the purpose is mistyped on the call or it is not accessible by the user trying to access it, the system will prevent access to that information
+
+### HTTP Request for signing a document
+
+`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign?access_token=AAAAAA"`
+
+This call will be equivalent to calling the `sign` method described above in terms of returned objects and error messages.
+
+If the purpose is mistyped on the call or it is not accessible by the user trying to access it, the system will prevent access to that information.
+
+```shell
+curl -X POST
+  -H "Content-Type: application/json"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/terms_of_service/sign?access_token=AAAAAA"
+```
+
+> The above command would return a json like this:
+
+```json
+{ "name": "Terms of Service",
+  "content": "text",
+  "created_at": "2017-12-11T09:17:10.753-05:00",
+  "updated_at": "2017-12-11T09:17:10.753-05:00",
+  "id": "kwey",
+  "signature": { "signed_at": "2017-08-01T23:55:10.981-05:00" }
+}
+```
+
 # iFrame
 
 ##iFrame URL calls
