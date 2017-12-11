@@ -14,11 +14,11 @@
   background-color: #272822;
 }
 .highlight .err {
-  color: #151515;
-  background-color: #ac4142;
+  color: #272822;
+  background-color: #f92672;
 }
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #505050;
+  color: #75715e;
 }
 .highlight .cp {
   color: #f4bf75;
@@ -27,45 +27,45 @@
   color: #f4bf75;
 }
 .highlight .o, .highlight .ow {
-  color: #d0d0d0;
+  color: #f8f8f2;
 }
 .highlight .p, .highlight .pi {
-  color: #d0d0d0;
+  color: #f8f8f2;
 }
 .highlight .gi {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .gd {
-  color: #ac4142;
+  color: #f92672;
 }
 .highlight .gh {
-  color: #6a9fb5;
-  background-color: #151515;
+  color: #66d9ef;
+  background-color: #272822;
   font-weight: bold;
 }
 .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #aa759f;
+  color: #ae81ff;
 }
 .highlight .kc {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .kt {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .kd {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .sr {
-  color: #75b5aa;
+  color: #a1efe4;
 }
 .highlight .si {
-  color: #8f5536;
+  color: #cc6633;
 }
 .highlight .se {
-  color: #8f5536;
+  color: #cc6633;
 }
 .highlight .nn {
   color: #f4bf75;
@@ -77,13 +77,13 @@
   color: #f4bf75;
 }
 .highlight .na {
-  color: #6a9fb5;
+  color: #66d9ef;
 }
 .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .ss {
-  color: #90a959;
+  color: #a6e22e;
 }
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
@@ -95,11 +95,11 @@
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" />
+        <img src="images/navbar.png" alt="Navbar" />
       </span>
     </a>
     <div class="tocify-wrapper">
-      <img src="images/logo.png" />
+      <img src="images/logo.png" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
         </div>
@@ -143,38 +143,36 @@ The requests presented on this API documentation are for our live **production e
 <blockquote>
 <p>The RubiconMD server authenticates via the use of access tokens. <br></p>
 </blockquote>
-<pre class="highlight shell"><code><span class="c"># Just a standard HTTP Request</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="c"># Just a standard HTTP Request</span>
   Note: Be sure to curl using https: when connecting.
 
 <span class="c">## User authentication not required (app has standing permissions from user)</span>
-curl -i https://rubiconmd.com/api/v1/oauth/token
- -F <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"standing"</span>
- -F <span class="nv">email</span><span class="o">=</span><span class="s2">"USER_EMAIL_ADDRESS"</span>
- -F <span class="nv">client_id</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_ID"</span>
- -F <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_SECRET"</span>
+curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/oauth/token
+ <span class="nt">-F</span> <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"standing"</span>
+ <span class="nt">-F</span> <span class="nv">email</span><span class="o">=</span><span class="s2">"USER_EMAIL_ADDRESS"</span>
+ <span class="nt">-F</span> <span class="nv">client_id</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_ID"</span>
+ <span class="nt">-F</span> <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_SECRET"</span>
 
  <span class="c">## User authentication required</span>
- curl -i https://rubiconmd.com/api/v1/oauth/token
- -F <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"client_credentials"</span>
- -F <span class="nv">client_id</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_ID"</span>
- -F <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_SECRET"</span>
-</code></pre>
-
+ curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/oauth/token
+ <span class="nt">-F</span> <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"client_credentials"</span>
+ <span class="nt">-F</span> <span class="nv">client_id</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_ID"</span>
+ <span class="nt">-F</span> <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_SECRET"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful request will return:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">7200</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">7200</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>RubiconMD uses an OAuth2 workflow for obtaining the access tokens needed for API access.</p>
 
-<p>To make an access token request, valid API keys are required. To request or cycle your API keys, please contact <a href="mailto: michael@rubiconmd.com?Subject=Rubicon%20API%20Keys">Michael</a>.</p>
+<p>To make an access token request, valid API keys are required. To request or cycle your API keys, please contact <a href="mailto:%20michael@rubiconmd.com?Subject=Rubicon%20API%20Keys">Michael</a>.</p>
 
 <p>RubiconMD API requires a valid access token to be included within the parameters for all API requests to the server:</p>
 
@@ -201,9 +199,8 @@ For security, all access_tokens expire in two hours.
 </aside>
 
 <h2 id="paginators">Paginators</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>&amp;per_page<span class="o">=</span>15&amp;page<span class="o">=</span>2
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>&amp;per_page<span class="o">=</span>15&amp;page<span class="o">=</span>2
+</code></pre></div>
 <p>You can use the <code class="prettyprint">per_page</code> and <code class="prettyprint">page</code> parameters to paginate results. If neither parameter is provided, all records will be returned by default.</p>
 
 <aside class="success">
@@ -237,26 +234,24 @@ Using pagination greatly increases response times and is highly recommended.
 <p>Provider Cases are created by a user that is seeking a specialist response to the case.</p>
 
 <h2 id="get-all-provider-cases">Get All Provider Cases</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful request returns the following:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">888</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assigned"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is it possible to have a case of Rocky Mountain Spotted Fever occur in the Appalachians and with stripes?"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">888</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assigned"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is it possible to have a case of Rocky Mountain Spotted Fever occur in the Appalachians and with stripes?"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>This endpoint retrieves all the provider case for the authenticated user.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -286,30 +281,28 @@ Using pagination greatly increases response times and is highly recommended.
 </tbody></table>
 
 <h2 id="get-a-specific-provider-case">Get a Specific Provider Case</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases/10071849?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/provider_cases/10071849?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful request returns the following:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"If not Red Death, maybe Telltale Heart Disease?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lots of partying and excessive drinking."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amontillado"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"convulsions, bloody sweat, seeing masked illusions."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"labs"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"If not Red Death, maybe Telltale Heart Disease?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lots of partying and excessive drinking."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amontillado"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"convulsions, bloody sweat, seeing masked illusions."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>This endpoint will return the JSON data about a specific case.</p>
 
 <aside class="notice">
@@ -335,32 +328,30 @@ Using pagination greatly increases response times and is highly recommended.
 </tbody></table>
 
 <h2 id="create-a-new-provider-case">Create a New Provider Case</h2>
-<pre class="highlight shell"><code>curl -X POST
-  -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases?access_token=AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases?access_token=AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful POST request returns a JSON response:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"If not Red Death, maybe Telltale Heart Disease?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lots of partying and excessive drinking."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amontillado"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"convulsions, bloody sweat, seeing masked illusions."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"labs"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10071849</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Victim bleeding from pores... possibly Red Death?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1842-05-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"If not Red Death, maybe Telltale Heart Disease?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lots of partying and excessive drinking."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amontillado"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"convulsions, bloody sweat, seeing masked illusions."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST https://rubiconmd.com/api/v1/provider_cases/ {&quot;provider_case&quot;: {&quot;question&quot;: TEXT, &quot;patient_birthdate&quot;: TEXT, &quot;patient_gender&quot;: TEXT, &quot;patient_first_name&quot;: TEXT, &quot;patient_middle_name&quot;: TEXT, &quot;patient_last_name&quot;: TEXT, &quot;differential_diagnosis&quot;: TEXT, &quot;medical_history&quot;: TEXT, &quot;medications&quot;: TEXT, &quot;symptoms&quot;: TEXT, &quot;labs&quot;: TEXT} }</code></p>
@@ -424,27 +415,25 @@ Using pagination greatly increases response times and is highly recommended.
 <p>Case Referrals are the de-identified cases received by a specialist. Only users that are specialists can access Case Referrals.</p>
 
 <h2 id="get-all-case-referrals">Get All Case Referrals</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/referrals?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/referrals?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Does this look deadly?"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Does this look deadly?"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"need_pcp_reply"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is this Lupus?"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"need_pcp_reply"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is this Lupus?"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all the case referrals for the authenticated user.</p>
+</span></code></pre></div>
+<p>This endpoint returns all the <code class="prettyprint">Consults</code> tied to <code class="prettyprint">Assignments</code> a specialist has participated on as individual or as a <code class="prettyprint">Specialist Panel</code> member, given that the assignments are not in <code class="prettyprint">revoked</code>, <code class="prettyprint">time_out</code> or <code class="prettyprint">declined</code> state. Will include also consults in <code class="prettyprint">timed_out</code> and <code class="prettyprint">declined</code> states if the <code class="prettyprint">Specialist</code> had written a <code class="prettyprint">Response</code> for them.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -475,30 +464,28 @@ Using pagination greatly increases response times and is highly recommended.
 <p><strong>states:</strong> assigned, accepted, declined, awaiting_review, need_specialist_reply, need_pcp_reply, closed</p>
 
 <h2 id="get-a-specific-case-referral">Get a Specific Case Referral</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/57?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/referrals/57?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is this normal?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my Differential Diagnosis."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A long one."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None that you should know."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feels bad."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"labs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cholesterol levels are fine."</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is this normal?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my Differential Diagnosis."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A long one."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None that you should know."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feels bad."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cholesterol levels are fine."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>This endpoint will return the JSON data about a specific case.</p>
 
 <aside class="notice">
@@ -524,30 +511,28 @@ Using pagination greatly increases response times and is highly recommended.
 </tbody></table>
 
 <h2 id="accept-reject-a-specific-case">Accept / Reject a Specific Case</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/57/reject?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/referrals/57/reject?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"declined"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is this normal?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my Differential Diagnosis."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A long one."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None that you should know."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feels bad."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"labs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cholesterol levels are fine."</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"declined"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is this normal?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:33:44.220-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:33:46.774-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.430-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my Differential Diagnosis."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A long one."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None that you should know."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feels bad."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cholesterol levels are fine."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>This endpoint allows you to accept or turn down a specific case.</p>
 
 <aside class="success">
@@ -586,36 +571,34 @@ An unsuccessful call will return a **402** and an error message:
 <h1 id="case-responses">Case Responses</h1>
 
 <h2 id="get-all-responses">Get All Responses</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/referrals/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 
-curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful request returns an array of JSON responses:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is where you put the specialist text response."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"specialist_opinion"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"need_reply"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is where you put the specialist text response."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"specialist_opinion"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"need_reply"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a pcp response."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:19:33.554-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pcp_reply"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"need_reply"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a pcp response."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:19:33.554-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pcp_reply"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"need_reply"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>Retrieves all the responses associated with a specific case.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -670,7 +653,7 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<sp
 </tr>
 <tr>
 <td>purpose</td>
-<td>Either &lsquo;pcp_comment&rsquo; or &#39;specialist_reply&rsquo;</td>
+<td>Either &lsquo;pcp_comment&rsquo; or &lsquo;specialist_reply&rsquo;</td>
 </tr>
 <tr>
 <td>need_reply</td>
@@ -679,25 +662,23 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<sp
 </tbody></table>
 
 <h2 id="get-a-specific-response">Get a Specific Response</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/referrals/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
 
-curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>The above command returns JSON like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"case_id"</span><span class="p">:</span><span class="mi">63</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"specialist_id"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"This is where you put the specialist text response."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"purpose"</span><span class="p">:</span><span class="s2">"specialist_opinion"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"need_reply"</span><span class="p">:</span><span class="kc">true</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"case_id"</span><span class="p">:</span><span class="mi">63</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="s2">"This is where you put the specialist text response."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="s2">"specialist_opinion"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"need_reply"</span><span class="p">:</span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>Lookup a specific response by the response&rsquo;s ID.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -727,29 +708,27 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token
 </tbody></table>
 
 <h2 id="post-a-response">Post a Response</h2>
-<pre class="highlight shell"><code>curl -X POST
-  -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"specialist_opinion","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/referrals/63/responses?access_token=AAAAAA"</span>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"specialist_opinion","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/referrals/63/responses?access_token=AAAAAA"</span>
 
-curl -X POST
-  -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"pcp_comment","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token=AAAAAA"</span>
-</code></pre>
-
+curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"pcp_comment","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token=AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful POST request returns a JSON response:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is where you put the text of the response."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pcp_comment"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"need_reply"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialist_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is where you put the text of the response."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pcp_comment"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"need_reply"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>This allows you post a response in a specific case (as a specialist). It also returns your response.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -793,28 +772,26 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 <h1 id="images">Images</h1>
 
 <h2 id="get-all-images-of-a-case">Get All Images of a case</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful request returns an array of JSON responses:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zhy7"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"image_file_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ee83c9baf45b73138bc6c771a.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"image_file_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">73260</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"image_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"removable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/original/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"large"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/large/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"thumb_340"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_340/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"thumb_180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_180/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"response_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zhy7"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"image_file_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ee83c9baf45b73138bc6c771a.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"image_file_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">73260</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"image_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"removable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/original/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"large"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/large/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_340"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_340/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_180/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"response_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>Retrieves all the images associated with a specific case.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -894,30 +871,28 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 </tbody></table>
 
 <h2 id="post-an-image">Post an Image</h2>
-<pre class="highlight shell"><code>curl -X POST
-  -H <span class="s2">"Origin: https://rubiconmd.com"</span>
-  -F <span class="s2">"attachment[image]=@/path/filename.ext"</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/A-9AGj/attachments?access_token=AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Origin: https://rubiconmd.com"</span>
+  <span class="nt">-F</span> <span class="s2">"attachment[image]=@/path/filename.ext"</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/A-9AGj/attachments?access_token=AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful POST request returns a JSON response:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zhy7"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"image_file_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ee83c9baf45b73138bc6c771a.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"image_file_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">73260</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"image_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"removable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/original/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"large"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/large/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"thumb_340"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_340/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"thumb_180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_180/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"response_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zhy7"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"image_file_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ee83c9baf45b73138bc6c771a.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"image_file_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">73260</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"image_content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-04-12T14:11:38.554-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-15T15:45:56.440-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"removable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/original/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"large"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/large/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_340"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_340/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rubicon.s3.amazonaws.com/attachments/images/000/000/000/thumb_180/ee83c9baf45b73138bc6c771a.jpg?"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"response_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>This allows you post an image in a specific case (as a pcp).</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -938,6 +913,172 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 </tr>
 </tbody></table>
 
+<h1 id="members">Members</h1>
+
+<p>Operate over the members of a Client Organization</p>
+
+<aside class="notice">
+  All calls to this endpoint require the client_organization_id of those members to be sent
+</aside>
+
+<h2 id="index">Index</h2>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/members?access_token=AAAAAA&amp;client_organization_id=ID</code></p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/members?access_token<span class="o">=</span>AAAAAA&amp;client_organization_id<span class="o">=</span>ID
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="s2">"1231231"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Franklin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="s2">"McAwesome"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="s2">"12/12/1959"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"email@domain.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"race"</span><span class="p">:</span><span class="s2">"asian"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="s2">"555-18000-YEAH"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="s2">"insurance info"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="s2">"with waldo"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="s2">"21231231"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Jenny"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="s2">"McDoe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="s2">"1/12/1987"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"another_email@domain.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"race"</span><span class="p">:</span><span class="s2">"caucasian"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="s2">"555-1800-HOWDY"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="s2">"insurance info"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="s2">"with waldo"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<h2 id="show">Show</h2>
+
+<aside class="notice">
+  Use the member UID/MRN as MEMBER_UID field for lookup
+</aside>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&amp;client_organization_id=ID</code></p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/member/1231231?access_token<span class="o">=</span>AAAAAA&amp;client_organization_id<span class="o">=</span>ID
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"uid"</span><span class="p">:</span><span class="s2">"1231231"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Franklin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="s2">"McAwesome"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"gender"</span><span class="p">:</span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="s2">"12/12/1959"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"email@domain.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"race"</span><span class="p">:</span><span class="s2">"asian"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="s2">"555-18000-YEAH"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"insurance"</span><span class="p">:</span><span class="s2">"insurance info"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"location"</span><span class="p">:</span><span class="s2">"with waldo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h2 id="create">Create</h2>
+
+<aside class="notice">
+  Use the member UID/MRN as MEMBER_UID field for lookup
+</aside>
+
+<p><code class="prettyprint">POST https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&amp;client_organization_id=ID/ {&quot;member&quot;: {
+  &quot;uid&quot;: TEXT,
+  &quot;first_name&quot;: TEXT,
+  &quot;last_name&quot;: TEXT,
+  &quot;gender&quot;: TEXT,
+  &quot;date_of_birth&quot;: TEXT,
+  &quot;email&quot;: TEXT,
+  &quot;race&quot;: TEXT,
+  &quot;phone_number&quot;: TEXT,
+  &quot;insurance&quot;: TEXT,
+  &quot;location&quot;: TEXT
+  }
+}</code></p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{"member": {"uid":"1231231", "first_name":"Franklin", "last_name":"McAwesome", "gender":"male", "date_of_birth":"12/12/1959", "email":"email@domain.com", "race":"asian", "phone_number":"555-18000-YEAH", "insurance":"insurance info", "location":"with waldo"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&amp;client_organization_id=ID"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"uid"</span><span class="p">:</span><span class="s2">"1231231"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Franklin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="s2">"McAwesome"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"gender"</span><span class="p">:</span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="s2">"12/12/1959"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"email@domain.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"race"</span><span class="p">:</span><span class="s2">"asian"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="s2">"555-18000-YEAH"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"insurance"</span><span class="p">:</span><span class="s2">"insurance info"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"location"</span><span class="p">:</span><span class="s2">"with waldo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h2 id="update">Update</h2>
+
+<aside class="notice">
+  <ul>
+    <li>Use the member UID/MRN as MEMBER_UID field for lookup</li>
+    <li>The UID/MRN field won&rsquo;t be updated, as it is used for lookup.</li>
+    <li>All fields are required!</li>
+  </ul>
+</aside>
+
+<p><code class="prettyprint">PUT https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=&quot;AAAAAA&quot;&amp;client_organization_id=&quot;ID&quot;/ {&quot;member&quot;: {
+  &quot;uid&quot;: TEXT,
+  &quot;first_name&quot;: TEXT,
+  &quot;last_name&quot;: TEXT,
+  &quot;gender&quot;: TEXT,
+  &quot;date_of_birth&quot;: TEXT,
+  &quot;email&quot;: TEXT,
+  &quot;race&quot;: TEXT,
+  &quot;phone_number&quot;: TEXT,
+  &quot;insurance&quot;: TEXT,
+  &quot;location&quot;: TEXT
+  }
+}</code></p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> PUT
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{"member": {"uid":"1231231", "first_name":"Johann", "last_name":"McAwesome", "gender":"male", "date_of_birth":"12/12/1959", "email":"email@domain.com", "race":"asian", "phone_number":"555-18000-YEAH", "insurance":"insurance info", "location":"with waldo"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&amp;client_organization_id=ID"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"uid"</span><span class="p">:</span><span class="s2">"1231231"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Johann"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="s2">"McAwesome"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"gender"</span><span class="p">:</span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="s2">"12/12/1959"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"email@domain.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"race"</span><span class="p">:</span><span class="s2">"asian"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="s2">"555-18000-YEAH"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"insurance"</span><span class="p">:</span><span class="s2">"insurance info"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"location"</span><span class="p">:</span><span class="s2">"with waldo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h2 id="destroy">Destroy</h2>
+
+<aside class="notice">
+  Use the member UID/MRN as MEMBER_UID field for lookup
+</aside>
+
+<p><code class="prettyprint">DELETE https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=&quot;AAAAAA&quot;&amp;client_organization_id=&quot;ID&quot;</code></p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> DELETE <span class="s2">"https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&amp;client_organization_id=ID"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"Member destroyed successfully"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
 <!--
  ##
  ##
@@ -949,47 +1090,51 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 <h1 id="users">Users</h1>
 
 <h2 id="user-information">User Information</h2>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/users/me?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/users/me?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"is_specialist"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"Franklin"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"McAwesome"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"role"</span><span class="p">:</span><span class="s2">"medical_doctor"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"awesome_specialist@rubiconmd.com"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"organization"</span><span class="p">:</span><span class="s2">"Health Medical Clinic"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"specialties"</span><span class="p">:[</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"is_specialist"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Franklin"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"last_name"</span><span class="p">:</span><span class="s2">"McAwesome"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"role"</span><span class="p">:</span><span class="s2">"medical_doctor"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"awesome_specialist@rubiconmd.com"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"organization"</span><span class="p">:</span><span class="s2">"Health Medical Clinic"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"organization_contract_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contract"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"tos_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"specialist_baa_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"specialist_agreement_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"organization_baa_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"organization_contract_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"specialties"</span><span class="p">:[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"specialty"</span><span class="p">:{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"Electrophysiology"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"category"</span><span class="p">:</span><span class="s2">"Cardiology"</span><span class="w">
+         </span><span class="s2">"specialty"</span><span class="p">:{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Electrophysiology"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="s2">"Cardiology"</span><span class="w">
          </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"specialty"</span><span class="p">:{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"HIV"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"category"</span><span class="p">:</span><span class="s2">"Infectious Diseases"</span><span class="w">
+         </span><span class="s2">"specialty"</span><span class="p">:{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"HIV"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="s2">"Infectious Diseases"</span><span class="w">
          </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"specialty"</span><span class="p">:{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"Hand surgery"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"category"</span><span class="p">:</span><span class="s2">"Orthopedic Surgery"</span><span class="w">
+         </span><span class="s2">"specialty"</span><span class="p">:{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Hand surgery"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="s2">"Orthopedic Surgery"</span><span class="w">
          </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>Want to get information about the user you just logged in? This is your endpoint.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -997,22 +1142,20 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 <p><code class="prettyprint">GET https://rubiconmd.com/api/v1/users/me?access_token=&quot;AAAAAA&quot;</code></p>
 
 <h2 id="creating-users">Creating Users</h2>
-<pre class="highlight shell"><code>curl -X POST
-  -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"user":{"email": "awesome_specialist@rubiconmd.com", "first_name": "Franklin", "last_name": "McAwesome", "role": "medical_doctor"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/users?access_token=AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{"user":{"email": "awesome_specialist@rubiconmd.com", "first_name": "Franklin", "last_name": "McAwesome", "role": "medical_doctor"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/users?access_token=AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"Franklin"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"McAwesome"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"awesome_specialist@rubiconmd.com"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"role"</span><span class="p">:</span><span class="s2">"medical_doctor"</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Franklin"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"last_name"</span><span class="p">:</span><span class="s2">"McAwesome"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"awesome_specialist@rubiconmd.com"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"role"</span><span class="p">:</span><span class="s2">"medical_doctor"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>This allows you to create a new provider for your organization.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -1041,7 +1184,7 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 </tr>
 <tr>
 <td>role</td>
-<td>User&rsquo;s role. Roles are limited to the following values: &#39;medical_doctor&rsquo; , &#39;physician_assistant&rsquo; , &#39;registered_nurse&rsquo; , &#39;nurse_practitioner&rsquo;</td>
+<td>User&rsquo;s role. Roles are limited to the following values: &lsquo;medical_doctor&rsquo; , &lsquo;physician_assistant&rsquo; , &lsquo;registered_nurse&rsquo; , &lsquo;nurse_practitioner&rsquo;</td>
 </tr>
 <tr>
 <td>per_page</td>
@@ -1053,60 +1196,91 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 </tr>
 </tbody></table>
 
+<h2 id="reviewers">Reviewers</h2>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/users/reviewers?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zaBgO"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Charles"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bovary"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"devoted.husband@gmail.fr"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9RXXW"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jason"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Awesome"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jason.awesome@gmail.com"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YdgL8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Megan"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chair"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"megachair@ucsf.edu"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Retrieve all the possible users that can review an eConsult.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/users/reviewers?access_token=&quot;AAAAAA&quot;</code></p>
+
 <h1 id="members">Members</h1>
 
 <h2 id="batch-upload">Batch Upload</h2>
-<pre class="highlight shell"><code>curl -X POST
-  -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","date_of_birth": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}'</span> <span class="s2">"https://rubiconmd.com/api/v1/members?access_token=AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","date_of_birth": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}'</span> <span class="s2">"https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>The above command ingests JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-867-5309"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emma"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bovary"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rouen.girl@gmail.fr"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Norman"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"officier de santé"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tostes"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-867-5309"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emma"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bovary"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rouen.girl@gmail.fr"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Norman"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"officier de santé"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tostes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-637-5309"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rodolphe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boulanger"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"livin.easy@gmail.fr"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aristocrat"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"independent wealth"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tostes"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-637-5309"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rodolphe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boulanger"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"livin.easy@gmail.fr"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aristocrat"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"independent wealth"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tostes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-638-6309"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Léon"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dupuis"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"poetry.lover@gmail.fr"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Norman"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grace of God?"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rouen"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-638-6309"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Léon"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dupuis"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"poetry.lover@gmail.fr"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Norman"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grace of God?"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rouen"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <p>This endpoint retrieves all the members associated with your API client&rsquo;s organization.</p>
 
 <h3 id="important-notes">Important Notes</h3>
@@ -1143,7 +1317,7 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 </tr>
 <tr>
 <td>gender</td>
-<td>Member gender. Preferred values are &#39;Male&rsquo;, &#39;Female&rsquo;, or &#39;Transgender&rsquo;</td>
+<td>Member gender. Preferred values are &lsquo;Male&rsquo;, &lsquo;Female&rsquo;, or &lsquo;Transgender&rsquo;</td>
 </tr>
 <tr>
 <td>date_of_birth</td>
@@ -1175,6 +1349,183 @@ The server will return an &ldquo;unprocessable entity&rdquo; HTTP response if th
 </tr>
 </tbody></table>
 
+<h1 id="legal-documents">Legal Documents</h1>
+
+<p>These API endpoints allow clients to have knowledge of which legal documents have been signed (accepted) by the user. For example, the &lsquo;terms of service&rsquo; or the &lsquo;specialist agreement&rsquo;.</p>
+
+<h2 id="index">index</h2>
+
+<p>This endpoint returns the basic information of the documents available to the user making the API call.</p>
+
+<h3 id="http-request"> HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA&quot;</code></p>
+
+<aside class="notice">
+  The user id is needed in the call, in the `:user_id` segment.
+</aside>
+
+<p>The call will return a JSON array with the <code class="prettyprint">name</code> of the documents, their <code class="prettyprint">id</code> and their <code class="prettyprint">purpose</code>. The former two pieces are used to access each individual document.</p>
+
+<p>Differences in the response will reside in:</p>
+
+<ul>
+<li>A Specialist will get the latest versions of privacy policy, terms of service, specialist agreement and specialis business associate agreement documents.</li>
+<li>An Organization Admin will get the latest versions the privacy policy, terms of service, business associate agreement and the different versions available for organization contracts. Even if several contract versions are listed, the user will only be able to access and sign the contract that suits the configuration of the Organization they belong to.</li>
+<li>The rest of users will get the latest versions of the privacy policy and the terms of service.</li>
+</ul>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> GET
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command would return a json like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms of Service"</span><span class="p">,</span><span class="w"> </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terms_of_service"</span><span class="p">,</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DlGy"</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Privacy Policy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"privacy_policy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<h2 id="show">show</h2>
+
+<p>This endpoint returns the information for the document related to the <code class="prettyprint">id</code> passed in the call.</p>
+
+<h3 id="http-request"> HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id?access_token=AAAAAA&quot;</code></p>
+
+<aside class="notice">
+  The user id is needed in the call, in the `:user_id` segment.
+</aside>
+
+<p>The call will return the name of the document, the text of the document in html format so it is easily usable in the views, and other info regarding the time of creation of the document.</p>
+
+<p>If the user has signed the document, it will return the date of when this action was performed.</p>
+
+<p>If the document requested is not accessible by the user (according to the user type) or can not be found, the response will have the <code class="prettyprint">422</code> status code and the body will be <code class="prettyprint">{error: &#39;Document not available&#39; }</code>.</p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> GET
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey?access_token=AAAAAA"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command would return a json like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Privacy Policy"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> GET
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/DlGy?access_token=AAAAAA"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command, for a signed document, would return a json like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms of Service"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h2 id="sign">sign</h2>
+
+<p>This endpoint allows a user to sign a document.</p>
+
+<h3 id="http-request"> HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign?access_token=AAAAAA&quot;</code></p>
+
+<aside class="notice">
+  The user id is needed in the call, in the `:user_id` segment. The document id is needed as well in the `:id` segment
+</aside>
+
+<p>The call will peform an attempt to generate a signature for the document backend side. If the call succeeds, the returned JSON object will be equivalent to the one in the <code class="prettyprint">show</code> method, in the case that the user has signed the document.</p>
+
+<p>If the call fails, the response will be a <code class="prettyprint">422</code> status code and the body will include the error that prevented the signature from being created. One possible reason for failure is that the user has already signed that document. In this case the json response would be: <code class="prettyprint">[&quot;Legal document signer should sign a document only once&quot;]</code></p>
+
+<p>If the document requested is not accessible by the user (according to the user type) or can not be found, the response will have the <code class="prettyprint">422</code> status code and the body will be <code class="prettyprint">{ error: &#39;Document not available&#39; }</code>.</p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey/sign?access_token=AAAAAA"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command, for a signed document, would return a json like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms of Service"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h2 id="accessing-documents-by-type">Accessing documents by type</h2>
+
+<p>To ease work for clients, we&rsquo;ve enabled the possiblity of accessing and signing the documents directly by their <code class="prettyprint">purpose</code>, so the initial call for the index method is not needed.</p>
+
+<p>The available purposes are:</p>
+
+<p>General (<strong>all</strong> users):</p>
+
+<ul>
+<li><code class="prettyprint">privacy_policy</code></li>
+<li><code class="prettyprint">terms_of_service</code></li>
+</ul>
+
+<p>Right now, all users should have a signature for the <code class="prettyprint">terms_of_service</code> document in order to use the platform, and be prompted by the client to sign it if otherwise.</p>
+
+<p>Directed to <strong>Organization admins</strong>:</p>
+
+<ul>
+<li><code class="prettyprint">contract</code></li>
+<li><code class="prettyprint">contract_dsa</code></li>
+<li><code class="prettyprint">baa</code></li>
+</ul>
+
+<p>Client Organizations need to have their <code class="prettyprint">baa</code> and proper <code class="prettyprint">contract</code> signed in order for their users to be able to access the platform. A client can know beforehand which contract should the organization admin sign with the information provided in the <code class="prettyprint">users#me</code> endpoint.</p>
+
+<p>Directed to <strong>Specialists</strong>:</p>
+
+<ul>
+<li><code class="prettyprint">specialist_agreement</code></li>
+<li><code class="prettyprint">specialist_baa</code></li>
+</ul>
+
+<p>Specialists need to have both documents above signed in order to operate in the platform.</p>
+
+<h3 id="http-request-for-accessing-a-document"> HTTP Request for accessing a document</h3>
+
+<p><code class="prettyprint">GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose?access_token=AAAAAA&quot;</code></p>
+
+<p>This call will be equivalent to calling the <code class="prettyprint">show</code> method described above in terms of returned objects and error messages.</p>
+
+<p>If the purpose is mistyped on the call or it is not accessible by the user trying to access it, the system will prevent access to that information</p>
+
+<h3 id="http-request-for-signing-a-document"> HTTP Request for signing a document</h3>
+
+<p><code class="prettyprint">POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign?access_token=AAAAAA&quot;</code></p>
+
+<p>This call will be equivalent to calling the <code class="prettyprint">sign</code> method described above in terms of returned objects and error messages.</p>
+
+<p>If the purpose is mistyped on the call or it is not accessible by the user trying to access it, the system will prevent access to that information.</p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/terms_of_service/sign?access_token=AAAAAA"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command would return a json like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms of Service"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <h1 id="iframe">iFrame</h1>
 
 <h2 id="iframe-url-calls">iFrame URL calls</h2>
@@ -1193,26 +1544,24 @@ User tokens are one-time/single use only.
 <h2 id="obtaining-a-user-token">Obtaining a user token</h2>
 
 <p>To get a user token, curl the endpoint with the access token.</p>
-<pre class="highlight shell"><code>curl -i https://rubiconmd.com/api/v1/users/token?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> https://rubiconmd.com/api/v1/users/token?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+</code></pre></div>
 <blockquote>
 <p>A successful request will return:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"user_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1302048000</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="w">
+    </span><span class="s2">"user_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1302048000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET https://rubiconmd.com/api/v1/users/token?access_token=&quot;AAAAAA&quot;</code></p>
 
-<h2 id="auto-login-amp-display-case">Auto-login &amp; Display case</h2>
+<h2 id="auto-login-display-case">Auto-login &amp; Display case</h2>
 
 <p>Pass users&rsquo; username, user token, and case id parameters into the URL.
 <aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside></p>
