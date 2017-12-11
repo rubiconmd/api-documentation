@@ -845,6 +845,12 @@ curl -i https://rubiconmd.com/api/v1/users/me?access_token="AAAAAA"
    "role":"medical_doctor",
    "email":"awesome_specialist@rubiconmd.com",
    "organization":"Health Medical Clinic",
+   "organization_contract_type": "contract",
+   "tos_accepted_at": "2017-08-01T23:55:10.981-05:00",
+   "specialist_baa_accepted_at": "null",
+   "specialist_agreement_accepted_at": "null",
+   "organization_baa_accepted_at": "2017-08-01T23:55:10.981-05:00",
+   "organization_contract_accepted_at": "2017-08-01T23:55:10.981-05:00",
    "country":"United States",
    "specialties":[
       {
