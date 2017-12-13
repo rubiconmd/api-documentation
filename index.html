@@ -1253,12 +1253,25 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
    </span><span class="s2">"role"</span><span class="p">:</span><span class="s2">"medical_doctor"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"awesome_specialist@rubiconmd.com"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"organization"</span><span class="p">:</span><span class="s2">"Health Medical Clinic"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"organization_contract_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contract"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"tos_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"specialist_baa_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"specialist_agreement_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"organization_baa_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"organization_contract_accepted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"legal_documents"</span><span class="p">:[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terms_of_service"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms Of Service"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w">
+     </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DlGy"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"specialist_baa"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Specialist Business Associate Agreement"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="w">
+     </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hxBn1"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"specialist_agreement"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Specialist Agreement"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
    </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"specialties"</span><span class="p">:[</span><span class="w">
       </span><span class="p">{</span><span class="w">
@@ -1286,6 +1299,10 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Want to get information about the user you just logged in? This is your endpoint.</p>
+
+<p>The <code>legal_documents</code> array returns the documents that correspond to that user to sign, and their signature date if signed. This is, a null on signed_at means the latest version of the given document is not signed by the user, and the client should handle the signing process.</p>
+
+<p>The <code>privacy_policy</code> document needs no signature from any user, so it won&#39;t be presented in this object. However, it will be accessible via the corresponding endpoints (see <em>Legal Documents</em> section).</p>
 <h3 id='http-request-12'>HTTP Request</h3>
 <p><code>GET https://rubiconmd.com/api/v1/users/me?access_token=&quot;AAAAAA&quot;</code></p>
 <h2 id='creating-users'>Creating Users</h2><pre class="highlight shell tab-shell"><code>curl -X POST
@@ -1531,10 +1548,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><code>GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id?access_token=AAAAAA&quot;</code></p>
 
@@ -1561,8 +1575,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><code>POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign?access_token=AAAAAA&quot;</code></p>
 
@@ -1625,8 +1638,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
   </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-11T09:17:10.753-05:00"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><code>POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign?access_token=AAAAAA&quot;</code></p>
 
