@@ -1051,6 +1051,19 @@ This endpoint returns the basic information of the documents available to the us
 
 ### HTTP Request
 
+```shell
+curl -X GET
+  -H "Content-Type: application/json"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"
+```
+
+> The above command would return a json like this:
+
+```json
+[ { "name": "Terms of Service", "purpose": "terms_of_service", "id": "DlGy" },
+  { "name": "Privacy Policy", "purpose": "privacy_policy", "id": "kwey" } ]
+```
+
 `GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"`
 
 <aside class="notice">
@@ -1065,36 +1078,12 @@ Differences in the response will reside in:
 * An Organization Admin will get the latest versions the privacy policy, terms of service, business associate agreement and the different versions available for organization contracts. Even if several contract versions are listed, the user will only be able to access and sign the contract that suits the configuration of the Organization they belong to.
 * The rest of users will get the latest versions of the privacy policy and the terms of service.
 
-```shell
-curl -X GET
-  -H "Content-Type: application/json"
-  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"
-```
-
-> The above command would return a json like this:
-
-```json
-[ { "name": "Terms of Service", "purpose": "terms_of_service", "id": "DlGy" },
-  { "name": "Privacy Policy", "purpose": "privacy_policy", "id": "kwey" } ]
-```
 
 ##show
 
 This endpoint returns the information for the document related to the `id` passed in the call.
 
 ### HTTP Request
-
-`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id?access_token=AAAAAA"`
-
-<aside class="notice">
-  The user id is needed in the call, in the `:user_id` segment.
-</aside>
-
-The call will return the name of the document, the text of the document in html format so it is easily usable in the views, and other info regarding the time of creation of the document.
-
-If the user has signed the document, it will return the date of when this action was performed.
-
-If the document requested is not accessible by the user (according to the user type) or can not be found, the response will have the `422` status code and the body will be `{error: 'Document not available' }`.
 
 ```shell
 curl -X GET
@@ -1132,23 +1121,23 @@ curl -X GET
 }
 ```
 
+`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id?access_token=AAAAAA"`
+
+<aside class="notice">
+  The user id is needed in the call, in the `:user_id` segment.
+</aside>
+
+The call will return the name of the document, the text of the document in html format so it is easily usable in the views, and other info regarding the time of creation of the document.
+
+If the user has signed the document, it will return the date of when this action was performed.
+
+If the document requested is not accessible by the user (according to the user type) or can not be found, the response will have the `422` status code and the body will be `{error: 'Document not available' }`.
+
 ##sign
 
 This endpoint allows a user to sign a document.
 
 ### HTTP Request
-
-`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign?access_token=AAAAAA"`
-
-<aside class="notice">
-  The user id is needed in the call, in the `:user_id` segment. The document id is needed as well in the `:id` segment
-</aside>
-
-The call will peform an attempt to generate a signature for the document backend side. If the call succeeds, the returned JSON object will be equivalent to the one in the `show` method, in the case that the user has signed the document.
-
-If the call fails, the response will be a `422` status code and the body will include the error that prevented the signature from being created. One possible reason for failure is that the user has already signed that document. In this case the json response would be: `["Legal document signer should sign a document only once"]`
-
-If the document requested is not accessible by the user (according to the user type) or can not be found, the response will have the `422` status code and the body will be `{ error: 'Document not available' }`.
 
 ```shell
 curl -X POST
@@ -1167,6 +1156,18 @@ curl -X POST
   "signature": { "signed_at": "2017-08-01T23:55:10.981-05:00" }
 }
 ```
+
+`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign?access_token=AAAAAA"`
+
+<aside class="notice">
+  The user id is needed in the call, in the `:user_id` segment. The document id is needed as well in the `:id` segment
+</aside>
+
+The call will peform an attempt to generate a signature for the document backend side. If the call succeeds, the returned JSON object will be equivalent to the one in the `show` method, in the case that the user has signed the document.
+
+If the call fails, the response will be a `422` status code and the body will include the error that prevented the signature from being created. One possible reason for failure is that the user has already signed that document. In this case the json response would be: `["Legal document signer should sign a document only once"]`
+
+If the document requested is not accessible by the user (according to the user type) or can not be found, the response will have the `422` status code and the body will be `{ error: 'Document not available' }`.
 
 ##Accessing documents by type
 
@@ -1206,12 +1207,6 @@ If the purpose is mistyped on the call or it is not accessible by the user tryin
 
 ### HTTP Request for signing a document
 
-`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign?access_token=AAAAAA"`
-
-This call will be equivalent to calling the `sign` method described above in terms of returned objects and error messages.
-
-If the purpose is mistyped on the call or it is not accessible by the user trying to access it, the system will prevent access to that information.
-
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
@@ -1229,6 +1224,12 @@ curl -X POST
   "signature": { "signed_at": "2017-08-01T23:55:10.981-05:00" }
 }
 ```
+
+`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign?access_token=AAAAAA"`
+
+This call will be equivalent to calling the `sign` method described above in terms of returned objects and error messages.
+
+If the purpose is mistyped on the call or it is not accessible by the user trying to access it, the system will prevent access to that information.
 
 # iFrame
 
