@@ -845,12 +845,25 @@ curl -i https://rubiconmd.com/api/v1/users/me?access_token="AAAAAA"
    "role":"medical_doctor",
    "email":"awesome_specialist@rubiconmd.com",
    "organization":"Health Medical Clinic",
-   "organization_contract_type": "contract",
    "tos_accepted_at": "2017-08-01T23:55:10.981-05:00",
-   "specialist_baa_accepted_at": "null",
-   "specialist_agreement_accepted_at": "null",
-   "organization_baa_accepted_at": "2017-08-01T23:55:10.981-05:00",
-   "organization_contract_accepted_at": "2017-08-01T23:55:10.981-05:00",
+   "legal_documents":[
+     {
+       "id": "kwey",
+       "purpose": "terms_of_service",
+       "name": "Terms Of Service",
+       "signed_at": "2017-08-01T23:55:10.981-05:00"
+     }, {
+       "id": "DlGy",
+       "purpose": "specialist_baa",
+       "name": "Specialist Business Associate Agreement",
+       "signed_at": "null"
+     }, {
+       "id": "hxBn1",
+       "purpose": "specialist_agreement",
+       "name": "Specialist Agreement",
+       "signed_at": "null"
+     }
+   ],
    "country":"United States",
    "specialties":[
       {
@@ -879,6 +892,10 @@ curl -i https://rubiconmd.com/api/v1/users/me?access_token="AAAAAA"
 ```
 
 Want to get information about the user you just logged in? This is your endpoint.
+
+The `legal_documents` array returns the documents that correspond to that user to sign, and their signature date if signed. This is, a null on signed_at means the latest version of the given document is not signed by the user, and the client should handle the signing process.
+
+The `privacy_policy` document needs no signature from any user, so it won't be presented in this object. However, it will be accessible via the corresponding endpoints (see _Legal Documents_ section).
 
 ### HTTP Request
 
@@ -1115,10 +1132,7 @@ curl -X GET
   "created_at": "2017-12-11T09:17:10.753-05:00",
   "updated_at": "2017-12-11T09:17:10.753-05:00",
   "id": "kwey",
-  "signature": {
-    "signed_at": "2017-08-01T23:55:10.981-05:00"
-  }
-}
+  "signed_at": "2017-08-01T23:55:10.981-05:00" }
 ```
 
 `GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id?access_token=AAAAAA"`
@@ -1153,8 +1167,7 @@ curl -X POST
   "created_at": "2017-12-11T09:17:10.753-05:00",
   "updated_at": "2017-12-11T09:17:10.753-05:00",
   "id": "kwey",
-  "signature": { "signed_at": "2017-08-01T23:55:10.981-05:00" }
-}
+  "signed_at": "2017-08-01T23:55:10.981-05:00" }
 ```
 
 `POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign?access_token=AAAAAA"`
@@ -1221,8 +1234,7 @@ curl -X POST
   "created_at": "2017-12-11T09:17:10.753-05:00",
   "updated_at": "2017-12-11T09:17:10.753-05:00",
   "id": "kwey",
-  "signature": { "signed_at": "2017-08-01T23:55:10.981-05:00" }
-}
+  "signed_at": "2017-08-01T23:55:10.981-05:00" }
 ```
 
 `POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign?access_token=AAAAAA"`
