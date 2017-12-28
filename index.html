@@ -311,6 +311,9 @@
                   <li>
                     <a href="#destroy" class="toc-h2 toc-link" data-title="Destroy">Destroy</a>
                   </li>
+                  <li>
+                    <a href="#consult" class="toc-h2 toc-link" data-title="Consult">Consult</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1232,7 +1235,197 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="s2">"Member destroyed successfully"</span><span class="w">
 </span><span class="p">]</span><span class="w">
+</span></code></pre><h2 id='consult'>Consult</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/members/1231231/consult/Pediatric?access_token<span class="o">=</span>AAAAAA&amp;client_organization_id<span class="o">=</span>ID
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this if the patient has <strong>one</strong> consult for that specialty</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A-DlHy"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assigned_to_specialist"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Non esse iste. Possimus qui sit ut eveniet natus et. Vitae tempore velit at. Eligendi blanditiis dolor dolorem quidem iure asperiores. Fugiat eligendi autem distinctio sed vel."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-28T13:35:29.758-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_response"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"question_data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"marked_urgent"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"submitted_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"question"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"assigned_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"accepted_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"resultable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schedulable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialty_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DlGy"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialty_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Specialty 1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"specialty_category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rugby"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"show_survey"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"closable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reviewer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original_consult_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kirstin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_middle_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lavinia"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Carroll"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1231231"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_language"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-28T13:35:29.705-05:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2003-05-06 14:48:36 +0200"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_gender_info"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"patient_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"primary care clinic"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ea eum ex. Est ea odit labore nesciunt id architecto. Architecto quas quidem voluptatem sed eius cum. Maiores excepturi numquam est voluptas. Sunt dicta enim eum."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ut asperiores inventore iste voluptate ut autem. Architecto odio corporis repudiandae molestiae. Non non suscipit reprehenderit aut. Eum in et qui ipsam rerum."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sit ut voluptatem iusto et alias. Quo ut iure. Explicabo laudantium voluptatem illum eius. Eius qui explicabo. Ex voluptates error."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Id labore sunt odit autem. Suscipit ut et modi distinctio dolor. Officiis eveniet at suscipit itaque numquam et. Rerum at aut dolor quae cumque adipisci tempore."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dignissimos nobis accusamus optio voluptatem accusantium non voluptatem. Quis adipisci est nihil voluptatibus porro aut necessitatibus. Laborum consequatur fuga. Non a corrupti cumque distinctio. Blanditiis explicabo rerum."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"clonable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transferrable"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+  </span><span class="s2">"case_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C-DlGy"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deletable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sharable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"screening_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"post_consult_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"editable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"pcp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kGPz"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"clinic"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_drafter_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joelle"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jaskolski"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medical_doctor"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AlGy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pediatric"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rugby"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"client_organization_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bypass_to_scheduling"</span><span class="p">:</span><span class="w"> </span><span class="s2">"never"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"require_review"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"category_abbreviation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OTHR"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/members/1231231/consult/Pediatric?access_token<span class="o">=</span>AAAAAA&amp;client_organization_id<span class="o">=</span>ID
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this if the patient has <strong>many</strong> consults for that specialty</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A-DlHy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assigned_to_specialist"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-28T13:41:07.869-05:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Consequuntur iure et ut voluptas. Porro sed dolorum qui dolorem. Aliquid eaque saepe impedit et perspiciatis."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_response"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"original_consult_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"consult_unread_alerts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ea culpa deserunt. Maxime voluptate sunt eveniet debitis. Aperiam tenetur sit quae. Perferendis optio reprehenderit amet et velit dignissimos. Maxime non ullam reiciendis."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aspernatur minima dolorem qui consequatur. Ratione nihil veritatis quisquam earum. Similique quo vitae. Aut est soluta earum consequatur beatae veniam et."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Voluptatem saepe est velit pariatur qui. Quas delectus et est. In quo omnis. Laudantium officia corrupti et."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Necessitatibus pariatur hic facere voluptates. Quos asperiores sit aut voluptate culpa. Distinctio quae laboriosam deleniti."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2007-11-20 19:05:46 +0100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Eliseo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_gender_info"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nikolaus"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1231231"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reviewer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"submitted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-28T13:36:07.801-05:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Iusto saepe dignissimos optio dolor beatae. Culpa fugiat ipsa. Ut unde dolores sapiente in. Hic inventore eum praesentium error illo."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dlay"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pediatry"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"category_abbreviation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OTHR"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"pcp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Martin"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Johnson"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kGab"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"clinic"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A-DtGy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-28T13:41:07.689-05:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Eos sint perferendis at earum doloribus nisi et. Enim repudiandae nobis corporis est eum quis. Enim tempora debitis omnis aut. Eos vero in omnis omnis. Voluptatem sit quisquam quos."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_response"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"original_consult_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"consult_unread_alerts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"differential_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vel voluptas aut odit. Inventore quia magni. Ea dolorum est perferendis."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"labs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nihil laudantium officia. Molestiae dolore doloribus. Praesentium sed vel. Deleniti quia quo quaerat quibusdam odio."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"medical_history"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Esse cum sit sint aut exercitationem ut aut. Veniam numquam architecto est reprehenderit voluptatem. Dicta consectetur eveniet quia molestias corrupti enim. Soluta est est placeat labore deserunt. Autem occaecati est."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"medications"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rerum consequatur dicta quasi ullam magnam. Sit ducimus modi deserunt voluptas. Vel rem voluptatum et cumque dicta qui."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_age"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1997-03-22 12:41:14 +0100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chaz"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Other"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_gender_info"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Homenick"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"patient_uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1231231"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reviewer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"submitted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-28T13:36:07.625-05:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"symptoms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soluta delectus ut saepe ut eum debitis voluptatem. Et dolor in tenetur ut et vel impedit. Voluptatem dolor aperiam. Minus ut voluptates modi sed sed. Debitis provident voluptate quos harum a cumque quis."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dlay"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pediatry"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"football"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"category_abbreviation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OTHR"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"pcp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richie"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grady"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kzsPb"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"clinic"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
+<aside class="notice">
+  Use the member UID/MRN as MEMBER_UID field for lookup
+</aside>
+
+<p>Given a <code>member UID/MRN</code>, the <code>client organization</code> and the desired <code>specialty</code> name, brings back the list of consults that the member has for the specialty, if any.</p>
+
+<p><code>GET https://rubiconmd.com/api/v1/members/:uid/consult/:specialty?access_token=AAAAAA&amp;client_organization_id=ID</code></p>
+
+<p><em>Possible outcomes:</em></p>
+
+<table><thead>
+<tr>
+<th>Problem</th>
+<th>Outcomes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Specialty does not exist</td>
+<td> 404 Specialty not found</td>
+</tr>
+<tr>
+<td>Member does not exist</td>
+<td>404 Member not found</td>
+</tr>
+<tr>
+<td>Member has no consults for that specialty</td>
+<td>404 Could not find consult by that specialty and patient uid</td>
+</tr>
+<tr>
+<td>Member has one consults for that specialty</td>
+<td>See right sidebar</td>
+</tr>
+<tr>
+<td>Member has many consults for that specialty</td>
+<td>See right sidebar</td>
+</tr>
+</tbody></table>
+
 <!--
  ##
  ##
