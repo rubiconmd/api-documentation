@@ -314,6 +314,9 @@
                   <li>
                     <a href="#consult" class="toc-h2 toc-link" data-title="Consult">Consult</a>
                   </li>
+                  <li>
+                    <a href="#batch-upload" class="toc-h2 toc-link" data-title="Batch Upload">Batch Upload</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -327,14 +330,6 @@
                   </li>
                   <li>
                     <a href="#reviewers" class="toc-h2 toc-link" data-title="Reviewers">Reviewers</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#members-2" class="toc-h1 toc-link" data-title="Members">Members</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#batch-upload" class="toc-h2 toc-link" data-title="Batch Upload">Batch Upload</a>
                   </li>
               </ul>
           </li>
@@ -1425,6 +1420,116 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <td>See right sidebar</td>
 </tr>
 </tbody></table>
+<h2 id='batch-upload'>Batch Upload</h2><pre class="highlight shell tab-shell"><code>curl -X POST
+  -H <span class="s2">"Content-Type: application/json"</span>
+  -d <span class="s1">'{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","date_of_birth": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}'</span> <span class="s2">"https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"</span>
+</code></pre>
+<blockquote>
+<p>The above command ingests JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-867-5309"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emma"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bovary"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rouen.girl@gmail.fr"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Norman"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"officier de santé"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tostes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-637-5309"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rodolphe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boulanger"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"livin.easy@gmail.fr"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aristocrat"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"independent wealth"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tostes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-638-6309"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Léon"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dupuis"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"poetry.lover@gmail.fr"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Norman"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grace of God?"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rouen"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all the members associated with your API client&#39;s organization.</p>
+<h3 id='important-notes'>Important Notes</h3>
+<ul>
+<li><p>All payloads must be formatted in JSON and wrapped with {&quot;members&quot;: [...]}, with the JSON payloads for individual members listed within the array.</p></li>
+<li><p>UID is required for each member and must be unique. If two payloads are submitted with the same UID, the payload received later will overwrite the earlier one.</p></li>
+<li><p>An access token created using the client_credentials authentication strategy is sufficient for this completing this request (most other tokens should be valid, as well).</p></li>
+</ul>
+<h3 id='http-request-12'>HTTP Request</h3>
+<p><code>POST https://rubiconmd.com/api/v1/members?access_token=&quot;AAAAAA&quot; {&quot;members&quot;:[{&quot;uid&quot;: &quot;JIYGN-357-5309&quot;,&quot;first_name&quot;: &quot;Charles&quot;,&quot;last_name&quot;: &quot;Bovary&quot;,&quot;gender&quot;: &quot;Male&quot;,&quot;date_of_birth&quot;: &quot;12/15/1856&quot;,&quot;email&quot;: &quot;devoted.husband@gmail.fr&quot;,&quot;race&quot;: &quot;Norman&quot;,&quot;phone_number&quot;: &quot;555-555-5555&quot;,&quot;insurance&quot;: &quot;self&quot;,&quot;location&quot;: &quot;Tostes&quot;,&quot;valid_until&quot;: &quot;01/15/2018&quot;}]}</code></p>
+<h3 id='query-optional-parameters-3'>Query Optional Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uid</td>
+<td>A unique identifier for the member, such as plan UID or MRN. (required)</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>Member first name. (recommended)</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>Member last name. (recommended)</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>Member gender. Preferred values are &#39;Male&#39;, &#39;Female&#39;, or &#39;Transgender&#39;</td>
+</tr>
+<tr>
+<td>date_of_birth</td>
+<td>Member birthdate. Should be formated as MM/DD/YYYY. (required)</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Member e-mail. (optional)</td>
+</tr>
+<tr>
+<td>race</td>
+<td>Member race. Can be combined with ethnicity.</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>Member contact phone number.</td>
+</tr>
+<tr>
+<td>insurance</td>
+<td>Member insurance plan (freetext).</td>
+</tr>
+<tr>
+<td>location</td>
+<td>Member current location.</td>
+</tr>
+<tr>
+<td>valid_until</td>
+<td>Date that member record is no longer valid, or must be renewed/updated by. Should be formated as MM/DD/YYYY.</td>
+</tr>
+</tbody></table>
 
 <!--
  ##
@@ -1496,7 +1601,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <p>The <code>legal_documents</code> array returns the documents that correspond to that user to sign, and their signature date if signed. This is, a null on signed_at means the latest version of the given document is not signed by the user, and the client should handle the signing process.</p>
 
 <p>The <code>privacy_policy</code> document needs no signature from any user, so it won&#39;t be presented in this object. However, it will be accessible via the corresponding endpoints (see <em>Legal Documents</em> section).</p>
-<h3 id='http-request-12'>HTTP Request</h3>
+<h3 id='http-request-13'>HTTP Request</h3>
 <p><code>GET https://rubiconmd.com/api/v1/users/me?access_token=&quot;AAAAAA&quot;</code></p>
 <h2 id='creating-users'>Creating Users</h2><pre class="highlight shell tab-shell"><code>curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
@@ -1513,7 +1618,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This allows you to create a new provider for your organization.</p>
-<h3 id='http-request-13'>HTTP Request</h3>
+<h3 id='http-request-14'>HTTP Request</h3>
 <p><code>POST https://rubiconmd.com/api/v1/users/ {&quot;user&quot;: {&quot;email&quot;: TEXT, &quot;first_name&quot;: TEXT, &quot;last_name&quot;: TEXT, &quot;role&quot;: ROLE} }</code></p>
 <h3 id='url-parameters-10'>URL Parameters</h3>
 <table><thead>
@@ -1574,118 +1679,8 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>Retrieve all the possible users that can review an eConsult.</p>
-<h3 id='http-request-14'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/users/reviewers?access_token=&quot;AAAAAA&quot;</code></p>
-<h1 id='members-2'>Members</h1><h2 id='batch-upload'>Batch Upload</h2><pre class="highlight shell tab-shell"><code>curl -X POST
-  -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","date_of_birth": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}'</span> <span class="s2">"https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"</span>
-</code></pre>
-<blockquote>
-<p>The above command ingests JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-867-5309"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emma"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bovary"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Female"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rouen.girl@gmail.fr"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Norman"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"officier de santé"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tostes"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-637-5309"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rodolphe"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boulanger"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"livin.easy@gmail.fr"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aristocrat"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"independent wealth"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tostes"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JIYGN-638-6309"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Léon"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dupuis"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Male"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/15/1856"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"poetry.lover@gmail.fr"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"race"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Norman"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-555-5555"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grace of God?"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rouen"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"valid_until"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/15/2018"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all the members associated with your API client&#39;s organization.</p>
-<h3 id='important-notes'>Important Notes</h3>
-<ul>
-<li><p>All payloads must be formatted in JSON and wrapped with {&quot;members&quot;: [...]}, with the JSON payloads for individual members listed within the array.</p></li>
-<li><p>UID is required for each member and must be unique. If two payloads are submitted with the same UID, the payload received later will overwrite the earlier one.</p></li>
-<li><p>An access token created using the client_credentials authentication strategy is sufficient for this completing this request (most other tokens should be valid, as well).</p></li>
-</ul>
 <h3 id='http-request-15'>HTTP Request</h3>
-<p><code>POST https://rubiconmd.com/api/v1/members?access_token=&quot;AAAAAA&quot; {&quot;members&quot;:[{&quot;uid&quot;: &quot;JIYGN-357-5309&quot;,&quot;first_name&quot;: &quot;Charles&quot;,&quot;last_name&quot;: &quot;Bovary&quot;,&quot;gender&quot;: &quot;Male&quot;,&quot;date_of_birth&quot;: &quot;12/15/1856&quot;,&quot;email&quot;: &quot;devoted.husband@gmail.fr&quot;,&quot;race&quot;: &quot;Norman&quot;,&quot;phone_number&quot;: &quot;555-555-5555&quot;,&quot;insurance&quot;: &quot;self&quot;,&quot;location&quot;: &quot;Tostes&quot;,&quot;valid_until&quot;: &quot;01/15/2018&quot;}]}</code></p>
-<h3 id='query-optional-parameters-3'>Query Optional Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>uid</td>
-<td>A unique identifier for the member, such as plan UID or MRN. (required)</td>
-</tr>
-<tr>
-<td>first_name</td>
-<td>Member first name. (recommended)</td>
-</tr>
-<tr>
-<td>last_name</td>
-<td>Member last name. (recommended)</td>
-</tr>
-<tr>
-<td>gender</td>
-<td>Member gender. Preferred values are &#39;Male&#39;, &#39;Female&#39;, or &#39;Transgender&#39;</td>
-</tr>
-<tr>
-<td>date_of_birth</td>
-<td>Member birthdate. Should be formated as MM/DD/YYYY. (required)</td>
-</tr>
-<tr>
-<td>email</td>
-<td>Member e-mail. (optional)</td>
-</tr>
-<tr>
-<td>race</td>
-<td>Member race. Can be combined with ethnicity.</td>
-</tr>
-<tr>
-<td>phone_number</td>
-<td>Member contact phone number.</td>
-</tr>
-<tr>
-<td>insurance</td>
-<td>Member insurance plan (freetext).</td>
-</tr>
-<tr>
-<td>location</td>
-<td>Member current location.</td>
-</tr>
-<tr>
-<td>valid_until</td>
-<td>Date that member record is no longer valid, or must be renewed/updated by. Should be formated as MM/DD/YYYY.</td>
-</tr>
-</tbody></table>
+<p><code>GET https://rubiconmd.com/api/v1/users/reviewers?access_token=&quot;AAAAAA&quot;</code></p>
 <h1 id='legal-documents'>Legal Documents</h1>
 <p>These API endpoints allow clients to have knowledge of which legal documents have been signed (accepted) by the user. For example, the &#39;terms of service&#39; or the &#39;specialist agreement&#39;.</p>
 <h2 id='index-2'>index</h2>
