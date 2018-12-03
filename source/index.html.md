@@ -662,7 +662,7 @@ curl -i https://rubiconmd.com/api/v1/members?access_token=AAAAAA&client_organiza
     "first_name":"Franklin",
     "last_name":"McAwesome",
     "gender":"male",
-    "date_of_birth":"12/12/1959",
+    "birthdate":"12/12/1959",
     "email":"email@domain.com",
     "race":"asian",
     "phone_number":"555-18000-YEAH",
@@ -674,7 +674,7 @@ curl -i https://rubiconmd.com/api/v1/members?access_token=AAAAAA&client_organiza
     "first_name":"Jenny",
     "last_name":"McDoe",
     "gender":"female",
-    "date_of_birth":"1/12/1987",
+    "birthdate":"1/12/1987",
     "email":"another_email@domain.com",
     "race":"caucasian",
     "phone_number":"555-1800-HOWDY",
@@ -703,7 +703,7 @@ curl -i https://rubiconmd.com/api/v1/member/1231231?access_token=AAAAAA&client_o
   "first_name":"Franklin",
   "last_name":"McAwesome",
   "gender":"male",
-  "date_of_birth":"12/12/1959",
+  "birthdate":"12/12/1959",
   "email":"email@domain.com",
   "race":"asian",
   "phone_number":"555-18000-YEAH",
@@ -723,7 +723,7 @@ curl -i https://rubiconmd.com/api/v1/member/1231231?access_token=AAAAAA&client_o
   "first_name": TEXT,
   "last_name": TEXT,
   "gender": TEXT,
-  "date_of_birth": TEXT,
+  "birthdate": TEXT,
   "email": TEXT,
   "race": TEXT,
   "phone_number": TEXT,
@@ -735,7 +735,7 @@ curl -i https://rubiconmd.com/api/v1/member/1231231?access_token=AAAAAA&client_o
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  -d '{"member": {"uid":"1231231", "first_name":"Franklin", "last_name":"McAwesome", "gender":"male", "date_of_birth":"12/12/1959", "email":"email@domain.com", "race":"asian", "phone_number":"555-18000-YEAH", "insurance":"insurance info", "location":"with waldo"}}' "https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&client_organization_id=ID"
+  -d '{"member": {"uid":"1231231", "first_name":"Franklin", "last_name":"McAwesome", "gender":"male", "birthdate":"12/12/1959", "email":"email@domain.com", "race":"asian", "phone_number":"555-18000-YEAH", "insurance":"insurance info", "location":"with waldo"}}' "https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&client_organization_id=ID"
 ```
 > The above command returns JSON structured like this:
 
@@ -745,7 +745,7 @@ curl -X POST
   "first_name":"Franklin",
   "last_name":"McAwesome",
   "gender":"male",
-  "date_of_birth":"12/12/1959",
+  "birthdate":"12/12/1959",
   "email":"email@domain.com",
   "race":"asian",
   "phone_number":"555-18000-YEAH",
@@ -769,7 +769,7 @@ curl -X POST
   "first_name": TEXT,
   "last_name": TEXT,
   "gender": TEXT,
-  "date_of_birth": TEXT,
+  "birthdate": TEXT,
   "email": TEXT,
   "race": TEXT,
   "phone_number": TEXT,
@@ -781,7 +781,7 @@ curl -X POST
 ```shell
 curl -X PUT
   -H "Content-Type: application/json"
-  -d '{"member": {"uid":"1231231", "first_name":"Johann", "last_name":"McAwesome", "gender":"male", "date_of_birth":"12/12/1959", "email":"email@domain.com", "race":"asian", "phone_number":"555-18000-YEAH", "insurance":"insurance info", "location":"with waldo"}}' "https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&client_organization_id=ID"
+  -d '{"member": {"uid":"1231231", "first_name":"Johann", "last_name":"McAwesome", "gender":"male", "birthdate":"12/12/1959", "email":"email@domain.com", "race":"asian", "phone_number":"555-18000-YEAH", "insurance":"insurance info", "location":"with waldo"}}' "https://rubiconmd.com/api/v1/member/MEMBER_UID?access_token=AAAAAA&client_organization_id=ID"
 ```
 > The above command returns JSON structured like this:
 
@@ -791,7 +791,7 @@ curl -X PUT
   "first_name":"Johann",
   "last_name":"McAwesome",
   "gender":"male",
-  "date_of_birth":"12/12/1959",
+  "birthdate":"12/12/1959",
   "email":"email@domain.com",
   "race":"asian",
   "phone_number":"555-18000-YEAH",
@@ -1001,7 +1001,7 @@ Member has many consults for that specialty | See right sidebar
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  -d '{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","date_of_birth": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}' "https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"
+  -d '{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}' "https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"
 ```
 
 > The above command ingests JSON structured like this:
@@ -1013,7 +1013,7 @@ curl -X POST
     "first_name": "Emma",
     "last_name": "Bovary",
     "gender": "Female",
-    "date_of_birth": "12/15/1856",
+    "birthdate": "12/15/1856",
     "email": "rouen.girl@gmail.fr",
     "race": "Norman",
     "phone_number": "555-555-5555",
@@ -1026,7 +1026,7 @@ curl -X POST
     "first_name": "Rodolphe",
     "last_name": "Boulanger",
     "gender": "Male",
-    "date_of_birth": "12/15/1856",
+    "birthdate": "12/15/1856",
     "email": "livin.easy@gmail.fr",
     "race": "Aristocrat",
     "phone_number": "555-555-5555",
@@ -1039,7 +1039,7 @@ curl -X POST
     "first_name": "Léon",
     "last_name": "Dupuis",
     "gender": "Male",
-    "date_of_birth": "12/15/1856",
+    "birthdate": "12/15/1856",
     "email": "poetry.lover@gmail.fr",
     "race": "Norman",
     "phone_number": "555-555-5555",
@@ -1062,7 +1062,7 @@ This endpoint retrieves all the members associated with your API client's organi
 
 ### HTTP Request
 
-`POST https://rubiconmd.com/api/v1/members?access_token="AAAAAA" {"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","date_of_birth": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}`
+`POST https://rubiconmd.com/api/v1/members?access_token="AAAAAA" {"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}`
 
 ### Query Optional Parameters
 
@@ -1072,7 +1072,7 @@ uid | A unique identifier for the member, such as plan UID or MRN. (required)
 first_name | Member first name. (recommended)
 last_name | Member last name. (recommended)
 gender | Member gender. Preferred values are 'Male', 'Female', or 'Transgender'
-date_of_birth | Member birthdate. Should be formated as MM/DD/YYYY. (required)
+birthdate | Member birthdate. Should be formated as MM/DD/YYYY. (required)
 email | Member e-mail. (optional)
 race | Member race. Can be combined with ethnicity.
 phone_number | Member contact phone number.
