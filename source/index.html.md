@@ -647,7 +647,7 @@ Operate over the members of a Payer
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  -d '{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","date_of_birth": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}' "https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"
+  -d '{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}' "https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"
 ```
 
 > The above command ingests JSON structured like this:
@@ -659,7 +659,7 @@ curl -X POST
     "first_name": "Emma",
     "last_name": "Bovary",
     "gender": "Female",
-    "date_of_birth": "12/15/1856",
+    "birthdate": "12/15/1856",
     "email": "rouen.girl@gmail.fr",
     "race": "Norman",
     "phone_number": "555-555-5555",
@@ -672,7 +672,7 @@ curl -X POST
     "first_name": "Rodolphe",
     "last_name": "Boulanger",
     "gender": "Male",
-    "date_of_birth": "12/15/1856",
+    "birthdate": "12/15/1856",
     "email": "livin.easy@gmail.fr",
     "race": "Aristocrat",
     "phone_number": "555-555-5555",
@@ -685,7 +685,7 @@ curl -X POST
     "first_name": "Léon",
     "last_name": "Dupuis",
     "gender": "Male",
-    "date_of_birth": "12/15/1856",
+    "birthdate": "12/15/1856",
     "email": "poetry.lover@gmail.fr",
     "race": "Norman",
     "phone_number": "555-555-5555",
@@ -708,7 +708,7 @@ This endpoint retrieves all the members associated with your API client's organi
 
 ### HTTP Request
 
-`POST https://rubiconmd.com/api/v1/members?access_token="AAAAAA" {"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","date_of_birth": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}`
+`POST https://rubiconmd.com/api/v1/members?access_token="AAAAAA" {"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}`
 
 ### Query Optional Parameters
 
@@ -718,7 +718,7 @@ uid | A unique identifier for the member, such as plan UID or MRN. (required)
 first_name | Member first name. (recommended)
 last_name | Member last name. (recommended)
 gender | Member gender. Preferred values are 'Male', 'Female', or 'Transgender'
-date_of_birth | Member birthdate. Should be formated as MM/DD/YYYY. (required)
+birthdate | Member birthdate. Should be formated as MM/DD/YYYY. (required)
 email | Member e-mail. (optional)
 race | Member race. Can be combined with ethnicity.
 phone_number | Member contact phone number.
