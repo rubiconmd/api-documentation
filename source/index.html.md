@@ -87,7 +87,7 @@ Here are some basic tools you can use with all API calls.
 ## Paginators
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/provider_cases?access_token="AAAAAA"&per_page=15&page=2
+curl -i https://rubiconmd.com/api/v1/provider_cases?per_page=15&page=2
 ```
 
 You can use the `per_page` and `page` parameters to paginate results. If neither parameter is provided, all records will be returned by default.
@@ -123,7 +123,7 @@ Provider Cases are created by a user that is seeking a specialist response to th
 ## Get All Provider Cases
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/provider_cases?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/provider_cases
 ```
 
 > A successful request returns the following:
@@ -147,7 +147,7 @@ This endpoint retrieves all the provider case for the authenticated user.
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/provider_cases?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/provider_cases`
 
 ### Query Optional Parameters
 
@@ -160,7 +160,7 @@ page | Page to display. [Read more.](#paginators)
 ## Get a Specific Provider Case
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/provider_cases/10071849?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/provider_cases/10071849
 ```
 
 > A successful request returns the following:
@@ -193,7 +193,7 @@ This endpoint will return the JSON data about a specific case.
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID`
 
 ### URL Parameters
 
@@ -206,7 +206,7 @@ CASE_ID | The ID of the case to retrieve
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  -d '{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}' "https://rubiconmd.com/api/v1/provider_cases?access_token=AAAAAA"
+  -d '{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}' "https://rubiconmd.com/api/v1/provider_cases"
 ```
 
 >A successful POST request returns a JSON response:
@@ -257,7 +257,7 @@ Case Referrals are the de-identified cases received by a specialist. Only users 
 ## Get All Case Referrals
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/referrals?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/referrals
 ```
 
 > The above command returns JSON structured like this:
@@ -281,7 +281,7 @@ This endpoint returns all the `Consults` tied to `Assignments` a specialist has 
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/referrals?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/referrals`
 
 ### Query Optional Parameters
 
@@ -296,7 +296,7 @@ page | Page to display. [Read more.](#paginators)
 ## Get a Specific Case Referral
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/referrals/57?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/referrals/57
 ```
 
 > The above command returns JSON structured like this:
@@ -329,7 +329,7 @@ This endpoint will return the JSON data about a specific case.
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/referrals/CASE_ID?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/referrals/CASE_ID`
 
 ### URL Parameters
 
@@ -341,7 +341,7 @@ CASE_ID | The ID of the case to retrieve
 ## Accept / Reject a Specific Case
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/referrals/57/reject?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/referrals/57/reject
 ```
 
 > The above command returns JSON structured like this:
@@ -377,7 +377,7 @@ An unsuccessful call will return a **402** and an error message:
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/rubiconmdeferrals/CASE_ID/ACTION?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/rubiconmdeferrals/CASE_ID/ACTION`
 
 ### URL Parameters
 
@@ -393,9 +393,9 @@ ACTION | Accepts or rejects a case.
 ## Get All Responses
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/referrals/63/responses?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/referrals/63/responses
 
-curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses
 ```
 
 > A successful request returns an array of JSON responses:
@@ -427,11 +427,11 @@ Retrieves all the responses associated with a specific case.
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses`
 
 or
 
-`GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses`
 
 ### URL Parameters
 
@@ -454,9 +454,9 @@ need_reply | Boolean value dictating whether or not creator needed a reply to th
 ## Get a Specific Response
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/referrals/63/responses/17?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/referrals/63/responses/17
 
-curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17
 ```
 
 >The above command returns JSON like this:
@@ -477,11 +477,11 @@ Lookup a specific response by the response's ID.
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses/RESPONSE_ID?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses/RESPONSE_ID`
 
 or
 
-`GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses/RESPONSE_ID?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses/RESPONSE_ID`
 
 ### URL Parameters
 
@@ -495,11 +495,11 @@ RESPONSE_ID | The ID of the specific response you want to get
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  -d '{"response":{"body":"This is where you put the text of the response.","purpose":"specialist_opinion","need_reply":"true"}}' "https://rubiconmd.com/api/v1/referrals/63/responses?access_token=AAAAAA"
+  -d '{"response":{"body":"This is where you put the text of the response.","purpose":"specialist_opinion","need_reply":"true"}}' "https://rubiconmd.com/api/v1/referrals/63/responses"
 
 curl -X POST
   -H "Content-Type: application/json"
-  -d '{"response":{"body":"This is where you put the text of the response.","purpose":"pcp_comment","need_reply":"true"}}' "https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token=AAAAAA"
+  -d '{"response":{"body":"This is where you put the text of the response.","purpose":"pcp_comment","need_reply":"true"}}' "https://rubiconmd.com/api/v1/provider_cases/63/responses"
 ```
 
 >A successful POST request returns a JSON response:
@@ -544,7 +544,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 ## Get All Images of a case
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments
 ```
 
 > A successful request returns an array of JSON responses:
@@ -570,7 +570,7 @@ Retrieves all the images associated with a specific case.
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token=AAAAAA`
+`GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments`
 
 ### URL Parameters
 
@@ -600,7 +600,7 @@ response_id | Response ID of response attached to the image
 ```shell
 curl -X POST
   -H "Origin: https://rubiconmd.com"
-  -F "attachment[image]=@/path/filename.ext" "https://rubiconmd.com/api/v1/provider_cases/A-9AGj/attachments?access_token=AAAAAA"
+  -F "attachment[image]=@/path/filename.ext" "https://rubiconmd.com/api/v1/provider_cases/A-9AGj/attachments"
 ```
 
 >A successful POST request returns a JSON response:
@@ -626,7 +626,7 @@ This allows you post an image in a specific case (as a pcp).
 
 ### HTTP Request
 
-`POST https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token=AAAAAA`
+`POST https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments`
 
 ### URL Parameters
 
@@ -643,7 +643,7 @@ Operate over the members of a Payer
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  -d '{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}' "https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"
+  -d '{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}' "https://rubiconmd.com/api/v1/members/upload"
 ```
 
 > The above command ingests JSON structured like this:
@@ -704,7 +704,7 @@ This endpoint retrieves all the members associated with your API client's organi
 
 ### HTTP Request
 
-`POST https://rubiconmd.com/api/v1/members?access_token="AAAAAA" {"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}`
+`POST https://rubiconmd.com/api/v1/members? {"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}`
 
 ### Query Optional Parameters
 
@@ -735,7 +735,7 @@ valid_until | Date that member record is no longer valid, or must be renewed/upd
 ##User Information
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/users/me?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/users/me
 ```
 > The above command returns JSON structured like this:
 
@@ -802,14 +802,14 @@ The `privacy_policy` document needs no signature from any user, so it won't be p
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/users/me?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/users/me`
 
 ##Creating Users
 
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  -d '{"user":{"email": "awesome_specialist@rubiconmd.com", "first_name": "Franklin", "last_name": "McAwesome", "role": "medical_doctor"}}' "https://rubiconmd.com/api/v1/users?access_token=AAAAAA"
+  -d '{"user":{"email": "awesome_specialist@rubiconmd.com", "first_name": "Franklin", "last_name": "McAwesome", "role": "medical_doctor"}}' "https://rubiconmd.com/api/v1/users"
 ```
 > The above command returns JSON structured like this:
 
@@ -842,7 +842,7 @@ page | Page to display. [Read more.](#paginators)
 ## Reviewers
 
 ```shell
-curl -i https://rubiconmd.com/api/v1/users/reviewers?access_token="AAAAAA"
+curl -i https://rubiconmd.com/api/v1/users/reviewers
 ```
 > The above command returns JSON structured like this:
 
@@ -873,7 +873,7 @@ Retrieve all the possible users that can review an eConsult.
 
 ### HTTP Request
 
-`GET https://rubiconmd.com/api/v1/users/reviewers?access_token="AAAAAA"`
+`GET https://rubiconmd.com/api/v1/users/reviewers`
 
 # Legal Documents
 
@@ -888,7 +888,7 @@ This endpoint returns the basic information of the documents available to the us
 ```shell
 curl -X GET
   -H "Content-Type: application/json"
-  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents"
 ```
 
 > The above command would return a json like this:
@@ -898,7 +898,7 @@ curl -X GET
   { "name": "Privacy Policy", "purpose": "privacy_policy", "id": "kwey" } ]
 ```
 
-`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"`
+`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents"`
 
 <aside class="notice">
   The user id is needed in the call, in the `:user_id` segment.
@@ -922,7 +922,7 @@ This endpoint returns the information for the document related to the `id` passe
 ```shell
 curl -X GET
   -H "Content-Type: application/json"
-  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey?access_token=AAAAAA"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey"
 ```
 
 > The above command would return a json like this:
@@ -938,7 +938,7 @@ curl -X GET
 ```shell
 curl -X GET
   -H "Content-Type: application/json"
-  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/DlGy?access_token=AAAAAA"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/DlGy"
 ```
 
 > The above command, for a signed document, would return a json like this:
@@ -952,7 +952,7 @@ curl -X GET
   "signed_at": "2017-08-01T23:55:10.981-05:00" }
 ```
 
-`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id?access_token=AAAAAA"`
+`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id"`
 
 <aside class="notice">
   The user id is needed in the call, in the `:user_id` segment.
@@ -973,7 +973,7 @@ This endpoint allows a user to sign a document.
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey/sign?access_token=AAAAAA"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey/sign"
 ```
 
 > The above command, for a signed document, would return a json like this:
@@ -987,7 +987,7 @@ curl -X POST
   "signed_at": "2017-08-01T23:55:10.981-05:00" }
 ```
 
-`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign?access_token=AAAAAA"`
+`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign"`
 
 <aside class="notice">
   The user id is needed in the call, in the `:user_id` segment. The document id is needed as well in the `:id` segment
@@ -1029,7 +1029,7 @@ Specialists need to have both documents above signed in order to operate in the 
 
 ### HTTP Request for accessing a document
 
-`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose?access_token=AAAAAA"`
+`GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose"`
 
 This call will be equivalent to calling the `show` method described above in terms of returned objects and error messages.
 
@@ -1040,7 +1040,7 @@ If the purpose is mistyped on the call or it is not accessible by the user tryin
 ```shell
 curl -X POST
   -H "Content-Type: application/json"
-  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/terms_of_service/sign?access_token=AAAAAA"
+  "https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/terms_of_service/sign"
 ```
 
 > The above command would return a json like this:
@@ -1054,7 +1054,7 @@ curl -X POST
   "signed_at": "2017-08-01T23:55:10.981-05:00" }
 ```
 
-`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign?access_token=AAAAAA"`
+`POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign"`
 
 This call will be equivalent to calling the `sign` method described above in terms of returned objects and error messages.
 
