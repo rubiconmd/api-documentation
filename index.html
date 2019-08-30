@@ -223,11 +223,6 @@
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#grant-types" class="toc-h2 toc-link" data-title="Grant Types">Grant Types</a>
-                  </li>
-              </ul>
           </li>
           <li>
             <a href="#basics" class="toc-h1 toc-link" data-title="Basics">Basics</a>
@@ -333,20 +328,6 @@
               </ul>
           </li>
           <li>
-            <a href="#iframe" class="toc-h1 toc-link" data-title="iFrame">iFrame</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#iframe-url-calls" class="toc-h2 toc-link" data-title="iFrame URL calls">iFrame URL calls</a>
-                  </li>
-                  <li>
-                    <a href="#obtaining-a-user-token" class="toc-h2 toc-link" data-title="Obtaining a user token">Obtaining a user token</a>
-                  </li>
-                  <li>
-                    <a href="#auto-login-amp-display-case" class="toc-h2 toc-link" data-title="Auto-login &amp; Display case">Auto-login &amp; Display case</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </div>
@@ -378,58 +359,14 @@ The requests presented on this API documentation are for our live **production e
 </tr>
 </tbody></table>
 <h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>The RubiconMD server authenticates via the use of access tokens. <br></p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># Just a standard HTTP Request</span>
-  Note: Be sure to curl using https: when connecting.
-
-<span class="c">## User authentication not required (app has standing permissions from user)</span>
-curl -i https://rubiconmd.com/api/v1/oauth/token
- -F <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"standing"</span>
- -F <span class="nv">email</span><span class="o">=</span><span class="s2">"USER_EMAIL_ADDRESS"</span>
- -F <span class="nv">client_id</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_ID"</span>
- -F <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_SECRET"</span>
-
- <span class="c">## User authentication required</span>
- curl -i https://rubiconmd.com/api/v1/oauth/token
- -F <span class="nv">grant_type</span><span class="o">=</span><span class="s2">"client_credentials"</span>
- -F <span class="nv">client_id</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_ID"</span>
- -F <span class="nv">client_secret</span><span class="o">=</span><span class="s2">"YOUR_CLIENT_SECRET"</span>
-</code></pre>
-<blockquote>
-<p>A successful request will return:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">7200</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>RubiconMD uses an OAuth2 workflow for obtaining the access tokens needed for API access.</p>
-
-<p>To make an access token request, valid API keys are required. To request or cycle your API keys, please contact <a href="mailto:%20michael@rubiconmd.com?Subject=Rubicon%20API%20Keys">Michael</a>.</p>
-
-<p>RubiconMD API requires a valid access token to be included within the parameters for all API requests to the server:</p>
-
-<p><code>?access_token=&quot;AAAAAA&quot;</code></p>
-
-<aside class="notice">
-For security, all access_tokens expire in two hours.
-</aside>
-<h3 id='grant-types'>Grant Types</h3>
-<p><code>standing</code>: If you are making a request on behalf of a user that has granted standing access to your application (if you created the user, such permissions are granted by default), then this grant type will return an access token that will be sufficient to make requests that user to authenticate on the RubiconMD site.</p>
-
-<p><code>client_credentials</code>: This will return a token that can be used for making queries that do not require a user to be logged in. This includes OAuth2-type queries where the user authenticates on the RubiconMD site, then is redirected back to your site with a valid_access token for making API calls on the user&#39;s behalf.</p>
+<p>RubiconMD uses cookies for authorization and authentication.</p>
 <h1 id='basics'>Basics</h1>
 <p>Here are some basic tools you can use with all API calls.</p>
 <h2 id='limit'>Limit</h2>
 <aside class="warning">
   The limit parameter has been deprecated -- it was just too limit-ed. Please use `per_page`, instead.
 </aside>
-<h2 id='paginators'>Paginators</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>&amp;per_page<span class="o">=</span>15&amp;page<span class="o">=</span>2
+<h2 id='paginators'>Paginators</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases?per_page<span class="o">=</span>15&amp;page<span class="o">=</span>2
 </code></pre>
 <p>You can use the <code>per_page</code> and <code>page</code> parameters to paginate results. If neither parameter is provided, all records will be returned by default.</p>
 
@@ -454,7 +391,7 @@ Using pagination greatly increases response times and is highly recommended.
 </ul>
 <h1 id='provider-cases'>Provider Cases</h1>
 <p>Provider Cases are created by a user that is seeking a specialist response to the case.</p>
-<h2 id='get-all-provider-cases'>Get All Provider Cases</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h2 id='get-all-provider-cases'>Get All Provider Cases</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases
 </code></pre>
 <blockquote>
 <p>A successful request returns the following:</p>
@@ -474,7 +411,7 @@ Using pagination greatly increases response times and is highly recommended.
 </span></code></pre>
 <p>This endpoint retrieves all the provider case for the authenticated user.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/provider_cases?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/provider_cases</code></p>
 <h3 id='query-optional-parameters'>Query Optional Parameters</h3>
 <table><thead>
 <tr>
@@ -495,7 +432,7 @@ Using pagination greatly increases response times and is highly recommended.
 <td>Page to display. <a href="#paginators">Read more.</a></td>
 </tr>
 </tbody></table>
-<h2 id='get-a-specific-provider-case'>Get a Specific Provider Case</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases/10071849?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h2 id='get-a-specific-provider-case'>Get a Specific Provider Case</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases/10071849
 </code></pre>
 <blockquote>
 <p>A successful request returns the following:</p>
@@ -523,7 +460,7 @@ Using pagination greatly increases response times and is highly recommended.
  Make sure to replace `CASE_ID` with the actual ID of the case you want to look up.
 </aside>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -538,7 +475,7 @@ Using pagination greatly increases response times and is highly recommended.
 </tbody></table>
 <h2 id='create-a-new-provider-case'>Create a New Provider Case</h2><pre class="highlight shell tab-shell"><code>curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases?access_token=AAAAAA"</span>
+  -d <span class="s1">'{"provider_case":{"question":"Victim bleeding from pores... possibly Red Death?","patient_birthdate": "2009-01-19","patient_gender": "Male","patient_first_name":"P.","patient_middle_name":"N/A","patient_last_name":"Prospero","differential_diagnosis":"If not Red Death, maybe Telltale Heart Disease?","medical_history":"Lots of partying and excessive drinking.","medications":"Amontillado","symptoms":"convulsions, bloody sweat, seeing masked illusions.","labs":"N/A"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases"</span>
 </code></pre>
 <blockquote>
 <p>A successful POST request returns a JSON response:</p>
@@ -615,7 +552,7 @@ Using pagination greatly increases response times and is highly recommended.
 </tbody></table>
 <h1 id='case-referrals'>Case Referrals</h1>
 <p>Case Referrals are the de-identified cases received by a specialist. Only users that are specialists can access Case Referrals.</p>
-<h2 id='get-all-case-referrals'>Get All Case Referrals</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h2 id='get-all-case-referrals'>Get All Case Referrals</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -635,7 +572,7 @@ Using pagination greatly increases response times and is highly recommended.
 </span></code></pre>
 <p>This endpoint returns all the <code>Consults</code> tied to <code>Assignments</code> a specialist has participated on as individual or as a <code>Specialist Panel</code> member, given that the assignments are not in <code>revoked</code>, <code>time_out</code> or <code>declined</code> state. Will include also consults in <code>timed_out</code> and <code>declined</code> states if the <code>Specialist</code> had written a <code>Response</code> for them.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/referrals?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/referrals</code></p>
 <h3 id='query-optional-parameters-2'>Query Optional Parameters</h3>
 <table><thead>
 <tr>
@@ -658,7 +595,7 @@ Using pagination greatly increases response times and is highly recommended.
 </tbody></table>
 
 <p><strong>states:</strong> assigned, accepted, declined, awaiting_review, need_specialist_reply, need_pcp_reply, closed</p>
-<h2 id='get-a-specific-case-referral'>Get a Specific Case Referral</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/57?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h2 id='get-a-specific-case-referral'>Get a Specific Case Referral</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/57
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -686,7 +623,7 @@ Using pagination greatly increases response times and is highly recommended.
  Make sure to replace `CASE_ID` with the actual ID of the case you want to look up.
 </aside>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/referrals/CASE_ID?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/referrals/CASE_ID</code></p>
 <h3 id='url-parameters-3'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -699,7 +636,7 @@ Using pagination greatly increases response times and is highly recommended.
 <td>The ID of the case to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='accept-reject-a-specific-case'>Accept / Reject a Specific Case</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/57/reject?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h2 id='accept-reject-a-specific-case'>Accept / Reject a Specific Case</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/57/reject
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -732,7 +669,7 @@ An unsuccessful call will return a **402** and an error message:
 {"error":"This case could not be accepted at this time."}
 </aside>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/rubiconmdeferrals/CASE_ID/ACTION?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/rubiconmdeferrals/CASE_ID/ACTION</code></p>
 <h3 id='url-parameters-4'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -751,9 +688,9 @@ An unsuccessful call will return a **402** and an error message:
 </tbody></table>
 
 <p><strong>Actions:</strong> accept, reject</p>
-<h1 id='case-responses'>Case Responses</h1><h2 id='get-all-responses'>Get All Responses</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h1 id='case-responses'>Case Responses</h1><h2 id='get-all-responses'>Get All Responses</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/63/responses
 
-curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses
 </code></pre>
 <blockquote>
 <p>A successful request returns an array of JSON responses:</p>
@@ -781,11 +718,11 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<sp
 </span></code></pre>
 <p>Retrieves all the responses associated with a specific case.</p>
 <h3 id='http-request-7'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses</code></p>
 
 <p>or</p>
 
-<p><code>GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses</code></p>
 <h3 id='url-parameters-5'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -834,9 +771,9 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token<sp
 <td>Boolean value dictating whether or not creator needed a reply to the response</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-specific-response'>Get a Specific Response</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h2 id='get-a-specific-response'>Get a Specific Response</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/referrals/63/responses/17
 
-curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17
 </code></pre>
 <blockquote>
 <p>The above command returns JSON like this:</p>
@@ -853,11 +790,11 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token
 </span></code></pre>
 <p>Lookup a specific response by the response&#39;s ID.</p>
 <h3 id='http-request-8'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses/RESPONSE_ID?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/referrals/CASE_ID/responses/RESPONSE_ID</code></p>
 
 <p>or</p>
 
-<p><code>GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses/RESPONSE_ID?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/responses/RESPONSE_ID</code></p>
 <h3 id='url-parameters-6'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -876,11 +813,11 @@ curl -i https://rubiconmd.com/api/v1/provider_cases/63/responses/17?access_token
 </tbody></table>
 <h2 id='post-a-response'>Post a Response</h2><pre class="highlight shell tab-shell"><code>curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"specialist_opinion","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/referrals/63/responses?access_token=AAAAAA"</span>
+  -d <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"specialist_opinion","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/referrals/63/responses"</span>
 
 curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"pcp_comment","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/63/responses?access_token=AAAAAA"</span>
+  -d <span class="s1">'{"response":{"body":"This is where you put the text of the response.","purpose":"pcp_comment","need_reply":"true"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/63/responses"</span>
 </code></pre>
 <blockquote>
 <p>A successful POST request returns a JSON response:</p>
@@ -930,7 +867,7 @@ curl -X POST
 <aside class="notice">
 The server will return an "unprocessable entity" HTTP response if the purpose does not match the user type (e.g., the user is a provider but the purpose is "specialist_reply").
 </aside>
-<h1 id='images'>Images</h1><h2 id='get-all-images-of-a-case'>Get All Images of a case</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h1 id='images'>Images</h1><h2 id='get-all-images-of-a-case'>Get All Images of a case</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments
 </code></pre>
 <blockquote>
 <p>A successful request returns an array of JSON responses:</p>
@@ -952,7 +889,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 </span></code></pre>
 <p>Retrieves all the images associated with a specific case.</p>
 <h3 id='http-request-10'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token=AAAAAA</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments</code></p>
 <h3 id='url-parameters-8'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1023,7 +960,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 </tbody></table>
 <h2 id='post-an-image'>Post an Image</h2><pre class="highlight shell tab-shell"><code>curl -X POST
   -H <span class="s2">"Origin: https://rubiconmd.com"</span>
-  -F <span class="s2">"attachment[image]=@/path/filename.ext"</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/A-9AGj/attachments?access_token=AAAAAA"</span>
+  -F <span class="s2">"attachment[image]=@/path/filename.ext"</span> <span class="s2">"https://rubiconmd.com/api/v1/provider_cases/A-9AGj/attachments"</span>
 </code></pre>
 <blockquote>
 <p>A successful POST request returns a JSON response:</p>
@@ -1045,7 +982,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 </span></code></pre>
 <p>This allows you post an image in a specific case (as a pcp).</p>
 <h3 id='http-request-11'>HTTP Request</h3>
-<p><code>POST https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments?access_token=AAAAAA</code></p>
+<p><code>POST https://rubiconmd.com/api/v1/provider_cases/CASE_ID/attachments</code></p>
 <h3 id='url-parameters-9'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1062,7 +999,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <p>Operate over the members of a Payer</p>
 <h2 id='batch-upload'>Batch Upload</h2><pre class="highlight shell tab-shell"><code>curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}'</span> <span class="s2">"https://rubiconmd.com/api/v1/members/upload?access_token=AAAAAA"</span>
+  -d <span class="s1">'{"members":[{"uid": "JIYGN-357-5309","first_name": "Charles","last_name": "Bovary","gender": "Male","birthdate": "12/15/1856","email": "devoted.husband@gmail.fr","race": "Norman","phone_number": "555-555-5555","insurance": "self","location": "Tostes","valid_until": "01/15/2018"}]}'</span> <span class="s2">"https://rubiconmd.com/api/v1/members/upload"</span>
 </code></pre>
 <blockquote>
 <p>The above command ingests JSON structured like this:</p>
@@ -1117,7 +1054,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <li><p>An access token created using the client_credentials authentication strategy is sufficient for this completing this request (most other tokens should be valid, as well).</p></li>
 </ul>
 <h3 id='http-request-12'>HTTP Request</h3>
-<p><code>POST https://rubiconmd.com/api/v1/members?access_token=&quot;AAAAAA&quot; {&quot;members&quot;:[{&quot;uid&quot;: &quot;JIYGN-357-5309&quot;,&quot;first_name&quot;: &quot;Charles&quot;,&quot;last_name&quot;: &quot;Bovary&quot;,&quot;gender&quot;: &quot;Male&quot;,&quot;birthdate&quot;: &quot;12/15/1856&quot;,&quot;email&quot;: &quot;devoted.husband@gmail.fr&quot;,&quot;race&quot;: &quot;Norman&quot;,&quot;phone_number&quot;: &quot;555-555-5555&quot;,&quot;insurance&quot;: &quot;self&quot;,&quot;location&quot;: &quot;Tostes&quot;,&quot;valid_until&quot;: &quot;01/15/2018&quot;}]}</code></p>
+<p><code>POST https://rubiconmd.com/api/v1/members? {&quot;members&quot;:[{&quot;uid&quot;: &quot;JIYGN-357-5309&quot;,&quot;first_name&quot;: &quot;Charles&quot;,&quot;last_name&quot;: &quot;Bovary&quot;,&quot;gender&quot;: &quot;Male&quot;,&quot;birthdate&quot;: &quot;12/15/1856&quot;,&quot;email&quot;: &quot;devoted.husband@gmail.fr&quot;,&quot;race&quot;: &quot;Norman&quot;,&quot;phone_number&quot;: &quot;555-555-5555&quot;,&quot;insurance&quot;: &quot;self&quot;,&quot;location&quot;: &quot;Tostes&quot;,&quot;valid_until&quot;: &quot;01/15/2018&quot;}]}</code></p>
 <h3 id='query-optional-parameters-3'>Query Optional Parameters</h3>
 <table><thead>
 <tr>
@@ -1178,7 +1115,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
  ##
  ##
 -->
-<h1 id='users'>Users</h1><h2 id='user-information'>User Information</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/users/me?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h1 id='users'>Users</h1><h2 id='user-information'>User Information</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/users/me
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1242,10 +1179,10 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 
 <p>The <code>privacy_policy</code> document needs no signature from any user, so it won&#39;t be presented in this object. However, it will be accessible via the corresponding endpoints (see <em>Legal Documents</em> section).</p>
 <h3 id='http-request-13'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/users/me?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/users/me</code></p>
 <h2 id='creating-users'>Creating Users</h2><pre class="highlight shell tab-shell"><code>curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"user":{"email": "awesome_specialist@rubiconmd.com", "first_name": "Franklin", "last_name": "McAwesome", "role": "medical_doctor"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/users?access_token=AAAAAA"</span>
+  -d <span class="s1">'{"user":{"email": "awesome_specialist@rubiconmd.com", "first_name": "Franklin", "last_name": "McAwesome", "role": "medical_doctor"}}'</span> <span class="s2">"https://rubiconmd.com/api/v1/users"</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1292,7 +1229,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <td>Page to display. <a href="#paginators">Read more.</a></td>
 </tr>
 </tbody></table>
-<h2 id='reviewers'>Reviewers</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/users/reviewers?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
+<h2 id='reviewers'>Reviewers</h2><pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/users/reviewers
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1320,14 +1257,14 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 </span></code></pre>
 <p>Retrieve all the possible users that can review an eConsult.</p>
 <h3 id='http-request-15'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/users/reviewers?access_token=&quot;AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/users/reviewers</code></p>
 <h1 id='legal-documents'>Legal Documents</h1>
 <p>These API endpoints allow clients to have knowledge of which legal documents have been signed (accepted) by the user. For example, the &#39;terms of service&#39; or the &#39;specialist agreement&#39;.</p>
 <h2 id='index'>index</h2>
 <p>This endpoint returns the basic information of the documents available to the user making the API call.</p>
 <h3 id='http-request-16'> HTTP Request</h3><pre class="highlight shell tab-shell"><code>curl -X GET
   -H <span class="s2">"Content-Type: application/json"</span>
-  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents"</span>
 </code></pre>
 <blockquote>
 <p>The above command would return a json like this:</p>
@@ -1335,7 +1272,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms of Service"</span><span class="p">,</span><span class="w"> </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terms_of_service"</span><span class="p">,</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DlGy"</span><span class="w"> </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Privacy Policy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"privacy_policy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p><code>GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents?access_token=AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents&quot;</code></p>
 
 <aside class="notice">
   The user id is needed in the call, in the `:user_id` segment.
@@ -1354,7 +1291,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <p>This endpoint returns the information for the document related to the <code>id</code> passed in the call.</p>
 <h3 id='http-request-17'> HTTP Request</h3><pre class="highlight shell tab-shell"><code>curl -X GET
   -H <span class="s2">"Content-Type: application/json"</span>
-  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey?access_token=AAAAAA"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey"</span>
 </code></pre>
 <blockquote>
 <p>The above command would return a json like this:</p>
@@ -1366,7 +1303,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre><pre class="highlight shell tab-shell"><code>curl -X GET
   -H <span class="s2">"Content-Type: application/json"</span>
-  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/DlGy?access_token=AAAAAA"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/DlGy"</span>
 </code></pre>
 <blockquote>
 <p>The above command, for a signed document, would return a json like this:</p>
@@ -1378,7 +1315,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p><code>GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id?access_token=AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id&quot;</code></p>
 
 <aside class="notice">
   The user id is needed in the call, in the `:user_id` segment.
@@ -1393,7 +1330,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 <p>This endpoint allows a user to sign a document.</p>
 <h3 id='http-request-18'> HTTP Request</h3><pre class="highlight shell tab-shell"><code>curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey/sign?access_token=AAAAAA"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/kwey/sign"</span>
 </code></pre>
 <blockquote>
 <p>The above command, for a signed document, would return a json like this:</p>
@@ -1405,7 +1342,7 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p><code>POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign?access_token=AAAAAA&quot;</code></p>
+<p><code>POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/:id/sign&quot;</code></p>
 
 <aside class="notice">
   The user id is needed in the call, in the `:user_id` segment. The document id is needed as well in the `:id` segment
@@ -1449,14 +1386,14 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
 
 <p>Specialists need to have both documents above signed in order to operate in the platform.</p>
 <h3 id='http-request-for-accessing-a-document'> HTTP Request for accessing a document</h3>
-<p><code>GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose?access_token=AAAAAA&quot;</code></p>
+<p><code>GET https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose&quot;</code></p>
 
 <p>This call will be equivalent to calling the <code>show</code> method described above in terms of returned objects and error messages.</p>
 
 <p>If the purpose is mistyped on the call or it is not accessible by the user trying to access it, the system will prevent access to that information</p>
 <h3 id='http-request-for-signing-a-document'> HTTP Request for signing a document</h3><pre class="highlight shell tab-shell"><code>curl -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/terms_of_service/sign?access_token=AAAAAA"</span>
+  <span class="s2">"https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/terms_of_service/sign"</span>
 </code></pre>
 <blockquote>
 <p>The above command would return a json like this:</p>
@@ -1468,67 +1405,11 @@ The server will return an "unprocessable entity" HTTP response if the purpose do
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kwey"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"signed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-01T23:55:10.981-05:00"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p><code>POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign?access_token=AAAAAA&quot;</code></p>
+<p><code>POST https://rubiconmd.com/api/v1/users/:user_id/legal_documents/type/:purpose/sign&quot;</code></p>
 
 <p>This call will be equivalent to calling the <code>sign</code> method described above in terms of returned objects and error messages.</p>
 
 <p>If the purpose is mistyped on the call or it is not accessible by the user trying to access it, the system will prevent access to that information.</p>
-<h1 id='iframe'>iFrame</h1><h2 id='iframe-url-calls'>iFrame URL calls</h2>
-<p>In order to call certain pages of our site through an iFrame, you must first obtain a user token.  It&#39;s a two-step process.</p>
-
-<ol>
-<li>Get a user token by curling the token endpoint with the access token.</li>
-<li>Append the user token along with user info in the url.</li>
-</ol>
-
-<aside class="notice">
-User tokens are one-time/single use only.
-</aside>
-<h2 id='obtaining-a-user-token'>Obtaining a user token</h2>
-<p>To get a user token, curl the endpoint with the access token.</p>
-<pre class="highlight shell tab-shell"><code>curl -i https://rubiconmd.com/api/v1/users/token?access_token<span class="o">=</span><span class="s2">"AAAAAA"</span>
-</code></pre>
-<blockquote>
-<p>A successful request will return:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"user_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAAAA"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1302048000</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre><h3 id='http-request-19'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/api/v1/users/token?access_token=&quot;AAAAAA&quot;</code></p>
-<h2 id='auto-login-amp-display-case'>Auto-login &amp; Display case</h2>
-<p>Pass users&#39; username, user token, and case id parameters into the URL.
-<aside class="warning">Inside HTML code blocks like this one, you can&#39;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside></p>
-<h3 id='http-request-20'>HTTP Request</h3>
-<p><code>GET https://rubiconmd.com/pcp_iframe?user_username=EMAIL&amp;user_token=TOKEN&amp;case_id=CASE_ID</code></p>
-<h3 id='url-parameters-11'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>email</td>
-<td>The e-mail of the user you are logging in.</td>
-</tr>
-<tr>
-<td>user_token</td>
-<td>Single-use user token.</td>
-</tr>
-<tr>
-<td>case_id</td>
-<td>The ID of the case you want to see.</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-If you send the user to the iframe with an invalid token the user will be asked to login.  No errors will be raised.
-</aside>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">Some of the errors you may find:</aside>
 
