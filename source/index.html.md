@@ -26,53 +26,7 @@ Server |  URL
 
 # Authentication
 
-> The RubiconMD server authenticates via the use of access tokens. <br>
-
-```shell
-# Just a standard HTTP Request
-  Note: Be sure to curl using https: when connecting.
-
-## User authentication not required (app has standing permissions from user)
-curl -i https://rubiconmd.com/api/v1/oauth/token
- -F grant_type="standing"
- -F email="USER_EMAIL_ADDRESS"
- -F client_id="YOUR_CLIENT_ID"
- -F client_secret="YOUR_CLIENT_SECRET"
-
- ## User authentication required
- curl -i https://rubiconmd.com/api/v1/oauth/token
- -F grant_type="client_credentials"
- -F client_id="YOUR_CLIENT_ID"
- -F client_secret="YOUR_CLIENT_SECRET"
-```
-
-> A successful request will return:
-
-```json
-[
-  {
-    "access_token": "AAAAAA",
-    "token_type": "bearer",
-    "expires_in": 7200
-  }
-]
-```
-
-RubiconMD uses an OAuth2 workflow for obtaining the access tokens needed for API access.
-
-To make an access token request, valid API keys are required. To request or cycle your API keys, please contact [Tim](mailto: tim@rubiconmd.com?Subject=Rubicon%20API%20Keys).
-
-RubiconMD API requires that the valid access token is sent on the request headers for API requests to the server:
-
-<aside class="notice">
-For security, all access_tokens expire in two hours.
-</aside>
-
-### Grant Types
-
-`standing`: If you are making a request on behalf of a user that has granted standing access to your application (if you created the user, such permissions are granted by default), then this grant type will return an access token that will be sufficient to make requests that user to authenticate on the RubiconMD site.
-
-`client_credentials`: This will return a token that can be used for making queries that do not require a user to be logged in. This includes OAuth2-type queries where the user authenticates on the RubiconMD site, then is redirected back to your site with a valid_access token for making API calls on the user's behalf.
+RubiconMD uses cookies for authorization and authentication.
 
 # Basics
 
