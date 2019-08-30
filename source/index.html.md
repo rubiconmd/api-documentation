@@ -58,15 +58,11 @@ curl -i https://rubiconmd.com/api/v1/oauth/token
 ]
 ```
 
-
-
 RubiconMD uses an OAuth2 workflow for obtaining the access tokens needed for API access.
 
-To make an access token request, valid API keys are required. To request or cycle your API keys, please contact [Michael](mailto: michael@rubiconmd.com?Subject=Rubicon%20API%20Keys).
+To make an access token request, valid API keys are required. To request or cycle your API keys, please contact [Tim](mailto: tim@rubiconmd.com?Subject=Rubicon%20API%20Keys).
 
-RubiconMD API requires a valid access token to be included within the parameters for all API requests to the server:
-
-`?access_token="AAAAAA"`
+RubiconMD API requires that the valid access token is sent on the request headers for API requests to the server:
 
 <aside class="notice">
 For security, all access_tokens expire in two hours.
